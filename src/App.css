@@ -2,6 +2,130 @@
   --primary-color: #243735;
   --secondary-color: #295d46;
 }
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+body {
+  line-height: 1;
+}
+ol,
+ul {
+  list-style: none;
+}
+blockquote,
+q {
+  quotes: none;
+}
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+  content: "";
+  content: none;
+}
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
 
 @font-face {
   font-family: "Montserrat";
@@ -11,15 +135,37 @@
 }
 
 .container {
-  min-height: 100vh;
+  height: 100vh;
   width: 100%;
-  background-color: var(--primary-color);
+  background: var(--primary-color);
+  display: flex;
+  font-family: sans-serif;
+  overflow: hidden;
+}
+
+.left-container {
+  flex: 4;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: start;
-  overflow: hidden;
-  font-family: "Montserrat";
+}
+
+.right-container {
+  flex: 1.5;
+  background: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.right_container-header {
+  font-size: 2rem;
+  color: var(--primary-color);
+  text-transform: uppercase;
+  margin-top: 4rem;
 }
 
 .navbar-container {
@@ -46,6 +192,9 @@
 
 .image-container {
   width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  overflow: hidden;
 }
 
 .time-container {
@@ -54,10 +203,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: end;
-}
-
-.time-header {
-  line-height: 0.1;
 }
 
 .time-desc {
@@ -82,7 +227,6 @@
   justify-content: center;
   align-items: start;
   padding-left: 2rem;
-  line-height: 0.1;
 }
 
 .progress-container h4 {
@@ -99,4 +243,52 @@
   font-weight: 900;
   font-size: 2rem;
   text-transform: uppercase;
+}
+
+.upcoming-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.upcoming-content {
+  padding: 4rem 3rem;
+}
+
+.upcoming {
+  color: white;
+  width: 95%;
+  display: flex;
+  background: var(--secondary-color);
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+}
+
+.booking-container {
+  margin: 0 auto;
+  color: white;
+  width: 95%;
+  border-radius: 200px;
+  border: 2px solid white;
+  margin-bottom: 2rem;
+}
+
+.booking-container a {
+  color: white;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.booking-content {
+  padding: 0.8rem 1rem;
+}
+
+.booking-container a:hover {
+  text-decoration: underline;
+}
+
+.booking-subtitle {
+  color: #a5a5a5;
 }
