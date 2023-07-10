@@ -1,7 +1,61 @@
+import { useState } from "react";
 import "./App.css";
 import "./fonts/montserrat/Montserrat-Bold.ttf";
 
+type Meeting = {
+  title: string | JSX.Element;
+  startTime: Date;
+  endTime: Date;
+  gradient?: boolean;
+  special?: boolean;
+};
+
 function App() {
+  const [meetings, setMeetings] = useState<Meeting[]>([
+    {
+      title: "Marketing Meeting",
+      startTime: new Date("2021-08-25T10:30:00"),
+      endTime: new Date("2021-08-25T11:30:00"),
+    },
+    {
+      title: (
+        <span className="schedule-subtitle">
+          Available for booking <a href="#">starbucks.meetingroom.com</a>
+        </span>
+      ),
+      startTime: new Date("2021-08-25T10:30:00"),
+
+      endTime: new Date("2021-08-25T11:30:00"),
+      special: true,
+    },
+    {
+      title: "Marketing Meeting",
+      startTime: new Date("2021-08-25T10:30:00"),
+      endTime: new Date("2021-08-25T11:30:00"),
+      gradient: true,
+    },
+    {
+      title: "Marketing Meeting",
+      startTime: new Date("2021-08-25T10:30:00"),
+      endTime: new Date("2021-08-25T11:30:00"),
+    },
+    {
+      title: "Marketing Meeting",
+      startTime: new Date("2021-08-25T10:30:00"),
+      endTime: new Date("2021-08-25T11:30:00"),
+    },
+  ]);
+
+  const now = new Date(Date.now());
+
+  const showTime = new Intl.DateTimeFormat("en-GB", {
+    hour: "numeric",
+    minute: "numeric",
+    hour12: false,
+  }).format(now);
+
+  const value = +showTime.split(":")[0];
+
   return (
     <div className="container">
       <div className="left-container">
@@ -14,7 +68,9 @@ function App() {
               />
             </div>
             <div className="time-container">
-              <h1 className="time-header">11:52am</h1>
+              <h1 className="time-header">
+                {showTime} <span>{value > 12 ? "PM" : "AM"}</span>
+              </h1>
               <span className="time-desc">
                 {new Intl.DateTimeFormat("en-GB", {
                   dateStyle: "full",
@@ -51,6 +107,35 @@ function App() {
       </div>
       <div className="right-container">
         <h1 className="right_container-header">Today's Schedule</h1>
+        <div className="schedule-container">
+          {meetings.map((m, i) => (
+            <>
+              {m.special ? (
+                <h1 key={i}>{m.title}</h1>
+              ) : (
+                <div
+                  className={`meeting_schedule-container ${
+                    m.gradient && "gradient"
+                  }`}
+                  key={i}
+                >
+                  <h1>
+                    {new Intl.DateTimeFormat("en-GB", {
+                      timeStyle: "short",
+                      hour12: true,
+                    }).format(m.startTime)}{" "}
+                    -{" "}
+                    {new Intl.DateTimeFormat("en-GB", {
+                      timeStyle: "short",
+                      hour12: true,
+                    }).format(m.endTime)}
+                  </h1>
+                  <h3>{m.title}</h3>
+                </div>
+              )}
+            </>
+          ))}
+        </div>
       </div>
     </div>
   );
