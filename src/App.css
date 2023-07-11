@@ -226,25 +226,25 @@ table {
 .meeting-container h1 {
   color: white;
   font-weight: 900;
-  font-size: 2.4rem;
+  font-size: 2.8rem;
   text-transform: uppercase;
 }
 
 .progress-container {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: start;
   padding-left: 2rem;
 }
 
 .progress-container h4 {
   color: #a5a5a5;
+  letter-spacing: 0.1px;
 }
 
 .progress_time-text {
   color: white;
-  font-size: 3.6rem;
+  font-size: 3.4rem;
+  font-weight: 100;
 }
 
 .progress-title {
@@ -273,6 +273,18 @@ table {
   flex-direction: column;
   justify-content: center;
   align-items: start;
+}
+
+.upcoming.active {
+  background: white;
+  border: 10px solid var(--gradient-start);
+  color: var(--secondary-color);
+  border-radius: 10px;
+}
+
+.upcoming.active .progress_time-text,
+.upcoming.active .progress-title {
+  color: var(--secondary-color);
 }
 
 .booking-container {
@@ -349,7 +361,6 @@ table {
   );
 
   border: 2px solid white;
-  box-shadow: inset 0 0 20px rgba(255, 255, 255, 0.4);
 }
 
 .meeting_schedule-container.gradient h1,

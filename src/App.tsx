@@ -1,6 +1,7 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import "./App.css";
 import "./fonts/montserrat/Montserrat-Bold.ttf";
+import { EvexiMock, Evexi } from "evexi";
 
 type Meeting = {
   title: string | JSX.Element;
@@ -11,6 +12,14 @@ type Meeting = {
 };
 
 function App() {
+  const evexi = new EvexiMock(Evexi);
+
+  useEffect(() => {
+    document.title = "Starbucks Meeting Room";
+  }, []);
+
+  const [vacant, setVacant] = useState<boolean>(false);
+
   const [meetings, setMeetings] = useState<Meeting[]>([
     {
       title: "Marketing Meeting",
@@ -88,10 +97,12 @@ function App() {
           <h2 className="progress-title">Online Strategy</h2>
         </div>
         <div className="upcoming-container">
-          <div className="upcoming">
+          <div className="upcoming active">
             <div className="upcoming-content">
               <h4>Up Next</h4>
-              <h1 className="progress_time-text">11:30am - 12:30pm</h1>
+              <h1 className="progress_time-text" id="upcoming">
+                11:30am - 12:30pm
+              </h1>
               <h2 className="progress-title">Marketing Strategy</h2>
             </div>
           </div>
