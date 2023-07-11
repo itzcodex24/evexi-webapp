@@ -2,73 +2,65 @@ import { useEffect, useState } from "react";
 import "./App.css";
 import "./fonts/montserrat/Montserrat-Bold.ttf";
 import axios from "axios";
+// eslint-disable-next-line
 
-type Meeting = {
-  title: string | JSX.Element;
-  startTime: Date;
-  endTime: Date;
-  gradient?: boolean;
-  special?: boolean;
-};
+function getDateDifference(date1: any, date2: any) {
+  const diffInMilli = Math.abs(date2 - date1);
+  const minutes = Math.floor(diffInMilli / (1000 * 60));
+  const hours = Math.floor(minutes / 60);
+  const days = Math.floor(hours / 24);
+
+  const remainingHours = hours % 24;
+  const remainingMinutes = minutes % 60;
+
+  if (days === 0 && remainingHours === 0) {
+    return `${remainingMinutes} minutes`;
+  } else if (days === 0) {
+    return `${remainingHours} hours, ${remainingMinutes} minutes`;
+  }
+
+  return `${days} days, ${remainingHours} hours, ${remainingMinutes} minutes`;
+}
 
 function App() {
   useEffect(() => {
     document.title = "Starbucks Meeting Room";
   }, []);
 
-  const [vacant, setVacant] = useState<boolean>(false);
-
-  const [meetings, setMeetings] = useState<Meeting[]>([
-    {
-      title: "Marketing Meeting",
-      startTime: new Date("2021-08-25T10:30:00"),
-      endTime: new Date("2021-08-25T11:30:00"),
-    },
-    {
-      title: (
-        <span className="schedule-subtitle">
-          Available for booking <a href="#">starbucks.meetingroom.com</a>
-        </span>
-      ),
-      startTime: new Date("2021-08-25T10:30:00"),
-
-      endTime: new Date("2021-08-25T11:30:00"),
-      special: true,
-    },
-    {
-      title: "Marketing Meeting",
-      startTime: new Date("2021-08-25T10:30:00"),
-      endTime: new Date("2021-08-25T11:30:00"),
-      gradient: true,
-    },
-    {
-      title: "Marketing Meeting",
-      startTime: new Date("2021-08-25T10:30:00"),
-      endTime: new Date("2021-08-25T11:30:00"),
-    },
-    {
-      title: "Marketing Meeting",
-      startTime: new Date("2021-08-25T10:30:00"),
-      endTime: new Date("2021-08-25T11:30:00"),
-    },
-  ]);
-
   const api_key = "AIzaSyCQJFvN3AAYRc4rQiz8lzhjrKg1lTKZbPg";
   const cal_id = "andrei.cherciu24@gmail.com";
 
   const [events, setEvents] = useState<any>([]);
+  const [vacant, setVacant] = useState<boolean>(false);
+  const [vacantTime, setVacantTime] = useState<string | null>(null);
 
   const now = new Date(Date.now());
 
   useEffect(() => {
     async function getEvents() {
+      const tomorrow = now.getTime() + 60 * 60 * 24 * 1000;
       const res = await axios.get(
-        `https://www.googleapis.com/calendar/v3/calendars/${cal_id}/events?key=${api_key}&orderBy=startTime&singleEvents=true&timeMin=${now.toISOString()}`
+        `https://www.googleapis.com/calendar/v3/calendars/${cal_id}/events?key=${api_key}&orderBy=startTime&singleEvents=true&timeMin=${now.toISOString()}&timeMax=${new Date(
+          tomorrow
+        ).toISOString()}`
       );
 
-      console.log(res);
-
+      console.log(res.data.items);
+      if (res.data.items.length === 0) return;
       setEvents(res.data.items);
+      const start = Date.parse(res.data.items[0]["start"]["dateTime"]);
+      const end = Date.parse(res.data.items[0]["end"]["dateTime"]);
+      const nowTime = Date.now();
+      if (nowTime >= start && nowTime <= end) {
+        setVacant(false);
+      } else {
+        setVacant(true);
+        const diff = getDateDifference(
+          Date.parse(res.data.items[0]["start"]["dateTime"]),
+          new Date().getTime()
+        );
+        setVacantTime(diff);
+      }
     }
     getEvents();
   }, []);
@@ -78,8 +70,6 @@ function App() {
     minute: "numeric",
     hour12: false,
   }).format(now);
-
-  const value = +showTime.split(":")[0];
 
   return (
     <div className="container">
@@ -93,9 +83,7 @@ function App() {
               />
             </div>
             <div className="time-container">
-              <h1 className="time-header">
-                {showTime} <span>{value > 12 ? "PM" : "AM"}</span>
-              </h1>
+              <h1 className="time-header">{showTime}</h1>
               <span className="time-desc">
                 {new Intl.DateTimeFormat("en-GB", {
                   dateStyle: "full",
@@ -108,18 +96,73 @@ function App() {
           <h1>Meeting room one</h1>
         </div>
         <div className="progress-container">
-          <h4>Meeting in progress</h4>
-          <h1 className="progress_time-text">11:30am - 12:30pm</h1>
-          <h2 className="progress-title">Online Strategy</h2>
+          {vacant ? (
+            <>
+              <h4>Vacant for the next</h4>
+              <h1 className="progress_time-text">{vacantTime}</h1>
+            </>
+          ) : (
+            <>
+              {events.length === 0 ? (
+                <h4 className="progress_time-text">No upcoming events</h4>
+              ) : (
+                <>
+                  <h4>Meeting in progress</h4>
+                  <h1 className="progress_time-text">
+                    {events[0] &&
+                      new Intl.DateTimeFormat("en-GB", {
+                        hour: "numeric",
+                        minute: "numeric",
+                        hour12: false,
+                      }).format(
+                        new Date(Date.parse(events[0]["start"]["dateTime"]))
+                      )}
+                    -{" "}
+                    {new Intl.DateTimeFormat("en-GB", {
+                      hour: "numeric",
+                      minute: "numeric",
+                      hour12: false,
+                    }).format(
+                      new Date(Date.parse(events[0]["end"]["dateTime"]))
+                    )}
+                  </h1>
+
+                  <h2 className="progress-title">
+                    {events[0] && events[0].summary}
+                  </h2>
+                </>
+              )}
+            </>
+          )}
         </div>
         <div className="upcoming-container">
           <div className="upcoming active">
             <div className="upcoming-content">
               <h4>Up Next</h4>
               <h1 className="progress_time-text" id="upcoming">
-                11:30am - 12:30pm
+                {events[vacant ? 0 : 1] ? (
+                  <>
+                    {new Intl.DateTimeFormat("en-GB", {
+                      hour: "numeric",
+                      minute: "numeric",
+                      hour12: false,
+                    }).format(Date.parse(events[0]["start"]["dateTime"]))}{" "}
+                    -
+                    {new Intl.DateTimeFormat("en-GB", {
+                      hour: "numeric",
+                      minute: "numeric",
+                      hour12: false,
+                    }).format(Date.parse(events[0]["end"]["dateTime"]))}
+                  </>
+                ) : (
+                  "No upcoming events"
+                )}
               </h1>
-              <h2 className="progress-title">Marketing Strategy</h2>
+              <h2 className="progress-title">
+                {!vacant
+                  ? events[1] && events[1].summary
+                  : events[0] && events[0].summary}
+              </h2>
             </div>
           </div>
         </div>
@@ -147,7 +190,6 @@ function App() {
               hour12: false,
             }).format(new Date(Date.parse(e["end"]["dateTime"])));
 
-            console.log(startDate, endDate);
             return (
               <div className={`meeting_schedule-container`} key={i}>
                 <h1>
