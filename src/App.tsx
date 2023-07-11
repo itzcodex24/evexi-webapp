@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import "./App.css";
 import "./fonts/montserrat/Montserrat-Bold.ttf";
-import { EvexiMock, Evexi } from "evexi";
+import axios from "axios";
 
 type Meeting = {
   title: string | JSX.Element;
@@ -12,8 +12,6 @@ type Meeting = {
 };
 
 function App() {
-  const evexi = new EvexiMock(Evexi);
-
   useEffect(() => {
     document.title = "Starbucks Meeting Room";
   }, []);
@@ -55,7 +53,25 @@ function App() {
     },
   ]);
 
+  const api_key = "AIzaSyCQJFvN3AAYRc4rQiz8lzhjrKg1lTKZbPg";
+  const cal_id = "andrei.cherciu24@gmail.com";
+
+  const [events, setEvents] = useState<any>([]);
+
   const now = new Date(Date.now());
+
+  useEffect(() => {
+    async function getEvents() {
+      const res = await axios.get(
+        `https://www.googleapis.com/calendar/v3/calendars/${cal_id}/events?key=${api_key}&orderBy=startTime&singleEvents=true&timeMin=${now.toISOString()}`
+      );
+
+      console.log(res);
+
+      setEvents(res.data.items);
+    }
+    getEvents();
+  }, []);
 
   const showTime = new Intl.DateTimeFormat("en-GB", {
     hour: "numeric",
@@ -119,33 +135,28 @@ function App() {
       <div className="right-container">
         <h1 className="right_container-header">Today's Schedule</h1>
         <div className="schedule-container">
-          {meetings.map((m, i) => (
-            <>
-              {m.special ? (
-                <h1 key={i}>{m.title}</h1>
-              ) : (
-                <div
-                  className={`meeting_schedule-container ${
-                    m.gradient && "gradient"
-                  }`}
-                  key={i}
-                >
-                  <h1>
-                    {new Intl.DateTimeFormat("en-GB", {
-                      timeStyle: "short",
-                      hour12: true,
-                    }).format(m.startTime)}{" "}
-                    -{" "}
-                    {new Intl.DateTimeFormat("en-GB", {
-                      timeStyle: "short",
-                      hour12: true,
-                    }).format(m.endTime)}
-                  </h1>
-                  <h3>{m.title}</h3>
-                </div>
-              )}
-            </>
-          ))}
+          {events.map((e: any, i: number) => {
+            const startDate = new Intl.DateTimeFormat("gb-EN", {
+              hour: "numeric",
+              minute: "numeric",
+              hour12: false,
+            }).format(new Date(Date.parse(e["start"]["dateTime"])));
+            const endDate = new Intl.DateTimeFormat("gb-EN", {
+              hour: "numeric",
+              minute: "numeric",
+              hour12: false,
+            }).format(new Date(Date.parse(e["end"]["dateTime"])));
+
+            console.log(startDate, endDate);
+            return (
+              <div className={`meeting_schedule-container`} key={i}>
+                <h1>
+                  <span>{startDate}</span>-<span>{endDate}</span>
+                </h1>
+                <h3>{e.summary}</h3>
+              </div>
+            );
+          })}
         </div>
       </div>
     </div>

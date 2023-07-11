@@ -160,8 +160,6 @@ table {
   background: rgba(255, 255, 255, 0.9);
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
-  align-items: center;
 }
 
 .right_container-header {
@@ -171,6 +169,7 @@ table {
   margin-top: 4rem;
   font-weight: 900;
   margin-bottom: 6rem;
+  text-align: center;
 }
 
 .navbar-container {
@@ -376,6 +375,7 @@ table {
   color: green;
   letter-spacing: 0.4px;
   opacity: 0.8;
+  text-align: center;
 }
 
 .schedule-subtitle a {
