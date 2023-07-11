@@ -305,8 +305,9 @@ table {
   padding: 0.8rem 1rem;
 }
 
-.booking-container a:hover {
-  text-decoration: underline;
+.booking-text {
+  font-weight: 900;
+  letter-spacing: 0.1px;
 }
 
 .booking-subtitle {
@@ -378,7 +379,7 @@ table {
   text-align: center;
 }
 
-.schedule-subtitle a {
+.schedule-text {
   color: darkgreen;
   letter-spacing: 0.1px;
   text-decoration: none;
