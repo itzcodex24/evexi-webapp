@@ -13,13 +13,21 @@ function getDateDifference(date1: any, date2: any) {
   const remainingHours = hours % 24;
   const remainingMinutes = minutes % 60;
 
-  if (days === 0 && remainingHours === 0) {
-    return `${remainingMinutes} minutes`;
-  } else if (days === 0) {
-    return `${remainingHours} hours, ${remainingMinutes} minutes`;
+  if (remainingHours === 0 && remainingMinutes === 0 && days === 0) {
+    return "Less than a minute";
   }
 
-  return `${days} days, ${remainingHours} hours, ${remainingMinutes} minutes`;
+  if (days === 0 && remainingHours === 0) {
+    return `${remainingMinutes} minute${remainingMinutes > 1 ? "s" : ""}`;
+  } else if (days === 0) {
+    return `${remainingHours} hour${
+      remainingHours > 1 ? "s" : ""
+    }, ${remainingMinutes} minute${remainingMinutes > 1 ? "s" : ""}`;
+  }
+
+  return `${days} day${days > 1 ? "s" : ""}, ${remainingHours} hour${
+    remainingHours > 1 ? "s" : ""
+  }, ${remainingMinutes} minute${remainingMinutes > 1 ? "s" : ""}`;
 }
 
 function App() {
@@ -33,8 +41,12 @@ function App() {
     TEXT: JSON.stringify({
       PAGE_TITLE: "Starbucks Meeting",
       BOOKING_TEXT: "starbucks.meeting.com",
+      MEETING_ROOM_NAME: "room one",
     }),
     COLORS: JSON.stringify({
+      FONT_COLOR_PRIMARY: "white",
+      FONT_COLOR_SECONDARY: "#2e6a4e",
+      FONT_COLOR_MUTED: "#a0a0a0",
       PRIMARY_COLOR: "#243735",
       SECONDARY_COLOR: "#295d46",
       TERTIARY_COLOR: "#2e6a4e",
@@ -73,6 +85,21 @@ function App() {
     document.title = env?.TEXT.TITLE ?? "Evexi";
 
     document.documentElement.style.setProperty(
+      "--font-color-primary",
+      env?.COLORS.FONT_COLOR_PRIMARY ?? "#000000"
+    );
+
+    document.documentElement.style.setProperty(
+      "--font-color-secondary",
+      env?.COLORS.FONT_COLOR_SECONDARY ?? "#000000"
+    );
+
+    document.documentElement.style.setProperty(
+      "--font-color-muted",
+      env?.COLORS.FONT_COLOR_MUTED ?? "#000000"
+    );
+
+    document.documentElement.style.setProperty(
       "--primary-color",
       env?.COLORS.PRIMARY_COLOR ?? "#000000"
     );
@@ -97,7 +124,7 @@ function App() {
           env?.API.CID
         }/events?key=${
           env?.API.API_KEY
-        }&orderBy=startTime&singleEvents=true&timeMin=${now.toISOString()}&timeMax=${new Date(
+        }&orderBy=startTime&singleEvents=true&maxResults=5&timeMin=${now.toISOString()}&timeMax=${new Date(
           tomorrow
         ).toISOString()}`
       );
@@ -146,7 +173,7 @@ function App() {
           </div>
         </div>
         <div className="meeting-container">
-          <h1>Meeting room one</h1>
+          <h1>{env.TEXT.MEETING_ROOM_NAME}</h1>
         </div>
         <div className="progress-container">
           {vacant ? (
