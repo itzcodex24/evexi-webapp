@@ -102,6 +102,8 @@ section {
   display: block;
 }
 body {
+  font-family: sans-serif;
+  overflow: hidden;
   line-height: 1;
 }
 ol,
@@ -136,8 +138,6 @@ table {
   width: 100%;
   background: var(--primary-color);
   display: flex;
-  font-family: sans-serif;
-  overflow: hidden;
 }
 
 .left-container {
@@ -389,4 +389,28 @@ table {
 
 .schedule-subtitle a:hover {
   text-decoration: underline;
+}
+
+.error-screen {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: black;
+}
+
+.error-content {
+  width: 60%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.error-content h1 {
+  color: var(--font-color-error);
+  text-align: center;
+  font-size: 3rem;
+  font-weight: 900;
 }

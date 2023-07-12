@@ -35,7 +35,7 @@ function App() {
 
   new EvexiMock(Evexi).all().env({
     API: JSON.stringify({
-      API_KEY: "AIzaSyCQJFvN3AAYRc4rQiz8lzhjrKg1lTKZbPg",
+      // API_KEY: "AIzaSyCQJFvN3AAYRc4rQiz8lzhjrKg1lTKZbPg",
       CID: "andrei.cherciu24@gmail.com",
     }),
     TEXT: JSON.stringify({
@@ -47,6 +47,7 @@ function App() {
       FONT_COLOR_PRIMARY: "white",
       FONT_COLOR_SECONDARY: "#2e6a4e",
       FONT_COLOR_MUTED: "#a0a0a0",
+      FONT_COLOR_ERROR: "#ff0000",
       PRIMARY_COLOR: "#243735",
       SECONDARY_COLOR: "#295d46",
       TERTIARY_COLOR: "#2e6a4e",
@@ -74,6 +75,7 @@ function App() {
     getVars();
   }, []);
 
+  const [error, setError] = useState<string | null>(null);
   const [events, setEvents] = useState<any>([]);
   const [vacant, setVacant] = useState<boolean>(false);
   const [vacantTime, setVacantTime] = useState<string | null>(null);
@@ -100,6 +102,11 @@ function App() {
     );
 
     document.documentElement.style.setProperty(
+      "--font-color-error",
+      env?.COLORS.FONT_COLOR_ERROR ?? "red"
+    );
+
+    document.documentElement.style.setProperty(
       "--primary-color",
       env?.COLORS.PRIMARY_COLOR ?? "#000000"
     );
@@ -114,8 +121,13 @@ function App() {
     );
 
     async function getEvents() {
-      const { API_KEY, CID } = env?.API;
-      if (!API_KEY || !CID) return;
+      const { API_KEY, CID } = env.API;
+      if (env && (!API_KEY || !CID)) {
+        setError(
+          'Please set the "API_KEY" and "CID" variables within the Evexi Admin Portal'
+        );
+        return;
+      }
 
       const tomorrow = now.getTime() + 60 * 60 * 24 * 1000;
 
@@ -155,141 +167,153 @@ function App() {
   }).format(now);
 
   return env ? (
-    <div className="container">
-      <div className="left-container">
-        <div className="navbar-container">
-          <div className="navbar">
-            <div className="image-container">
-              <img src={env?.LOGO} alt="logo" />
+    <>
+      {error ? (
+        <div className="error-screen">
+          <div className="error-content">
+            <h1>{error}</h1>
+          </div>
+        </div>
+      ) : (
+        <div className="container">
+          <div className="left-container">
+            <div className="navbar-container">
+              <div className="navbar">
+                <div className="image-container">
+                  <img src={env?.LOGO} alt="logo" />
+                </div>
+                <div className="time-container">
+                  <h1 className="time-header">{showTime}</h1>
+                  <span className="time-desc">
+                    {new Intl.DateTimeFormat("en-GB", {
+                      dateStyle: "full",
+                    }).format(new Date(Date.now()))}
+                  </span>
+                </div>
+              </div>
             </div>
-            <div className="time-container">
-              <h1 className="time-header">{showTime}</h1>
-              <span className="time-desc">
-                {new Intl.DateTimeFormat("en-GB", {
-                  dateStyle: "full",
-                }).format(new Date(Date.now()))}
+            <div className="meeting-container">
+              <h1>{env.TEXT.MEETING_ROOM_NAME}</h1>
+            </div>
+            <div className="progress-container">
+              {vacant ? (
+                <>
+                  <h4>Vacant for the next</h4>
+                  <h1 className="progress_time-text">{vacantTime}</h1>
+                </>
+              ) : (
+                <>
+                  {events.length === 0 ? (
+                    <h4 className="progress_time-text">No upcoming events</h4>
+                  ) : (
+                    <>
+                      <h4>Meeting in progress</h4>
+                      <h1 className="progress_time-text">
+                        {events[0] &&
+                          new Intl.DateTimeFormat("en-GB", {
+                            hour: "numeric",
+                            minute: "numeric",
+                            hour12: false,
+                          }).format(
+                            new Date(Date.parse(events[0]["start"]["dateTime"]))
+                          )}
+                        -{" "}
+                        {new Intl.DateTimeFormat("en-GB", {
+                          hour: "numeric",
+                          minute: "numeric",
+                          hour12: false,
+                        }).format(
+                          new Date(Date.parse(events[0]["end"]["dateTime"]))
+                        )}
+                      </h1>
+
+                      <h2 className="progress-title">
+                        {events[0] && events[0].summary}
+                      </h2>
+                    </>
+                  )}
+                </>
+              )}
+            </div>
+            <div className="upcoming-container">
+              <div className="upcoming active">
+                <div className="upcoming-content">
+                  <h4>Up Next</h4>
+                  <h1 className="progress_time-text" id="upcoming">
+                    {events[vacant ? 0 : 1] ? (
+                      <>
+                        {new Intl.DateTimeFormat("en-GB", {
+                          hour: "numeric",
+                          minute: "numeric",
+                          hour12: false,
+                        }).format(
+                          Date.parse(events[0]["start"]["dateTime"])
+                        )}{" "}
+                        -
+                        {new Intl.DateTimeFormat("en-GB", {
+                          hour: "numeric",
+                          minute: "numeric",
+                          hour12: false,
+                        }).format(Date.parse(events[0]["end"]["dateTime"]))}
+                      </>
+                    ) : (
+                      "No upcoming events"
+                    )}
+                  </h1>
+                  <h2 className="progress-title">
+                    {!vacant
+                      ? events[1] && events[1].summary
+                      : events[0] && events[0].summary}
+                  </h2>
+                </div>
+              </div>
+            </div>
+            <div className="booking-container">
+              <div className="booking-content">
+                <span className="booking-subtitle">Book your slot at </span>
+                <span className="booking-text">{env.TEXT.BOOKING_TEXT}</span>
+              </div>
+            </div>
+          </div>
+          <div className="right-container">
+            <h1 className="right_container-header">Today's Schedule</h1>
+            <div className="schedule-container">
+              {events.length > 0 ? (
+                events.map((e: any, i: number) => {
+                  const startDate = new Intl.DateTimeFormat("gb-EN", {
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: false,
+                  }).format(new Date(Date.parse(e["start"]["dateTime"])));
+                  const endDate = new Intl.DateTimeFormat("gb-EN", {
+                    hour: "numeric",
+                    minute: "numeric",
+                    hour12: false,
+                  }).format(new Date(Date.parse(e["end"]["dateTime"])));
+
+                  return (
+                    <div className={`meeting_schedule-container`} key={i}>
+                      <h1>
+                        <span>{startDate}</span>-<span>{endDate}</span>
+                      </h1>
+                      <h3>{e.summary}</h3>
+                    </div>
+                  );
+                })
+              ) : (
+                <>
+                  <h1 className="time-header center ">No upcoming events</h1>
+                </>
+              )}
+              <span className="schedule-subtitle">
+                Available for booking{" "}
+                <span className="schedule-text">{env.TEXT.BOOKING_TEXT}</span>
               </span>
             </div>
           </div>
         </div>
-        <div className="meeting-container">
-          <h1>{env.TEXT.MEETING_ROOM_NAME}</h1>
-        </div>
-        <div className="progress-container">
-          {vacant ? (
-            <>
-              <h4>Vacant for the next</h4>
-              <h1 className="progress_time-text">{vacantTime}</h1>
-            </>
-          ) : (
-            <>
-              {events.length === 0 ? (
-                <h4 className="progress_time-text">No upcoming events</h4>
-              ) : (
-                <>
-                  <h4>Meeting in progress</h4>
-                  <h1 className="progress_time-text">
-                    {events[0] &&
-                      new Intl.DateTimeFormat("en-GB", {
-                        hour: "numeric",
-                        minute: "numeric",
-                        hour12: false,
-                      }).format(
-                        new Date(Date.parse(events[0]["start"]["dateTime"]))
-                      )}
-                    -{" "}
-                    {new Intl.DateTimeFormat("en-GB", {
-                      hour: "numeric",
-                      minute: "numeric",
-                      hour12: false,
-                    }).format(
-                      new Date(Date.parse(events[0]["end"]["dateTime"]))
-                    )}
-                  </h1>
-
-                  <h2 className="progress-title">
-                    {events[0] && events[0].summary}
-                  </h2>
-                </>
-              )}
-            </>
-          )}
-        </div>
-        <div className="upcoming-container">
-          <div className="upcoming active">
-            <div className="upcoming-content">
-              <h4>Up Next</h4>
-              <h1 className="progress_time-text" id="upcoming">
-                {events[vacant ? 0 : 1] ? (
-                  <>
-                    {new Intl.DateTimeFormat("en-GB", {
-                      hour: "numeric",
-                      minute: "numeric",
-                      hour12: false,
-                    }).format(Date.parse(events[0]["start"]["dateTime"]))}{" "}
-                    -
-                    {new Intl.DateTimeFormat("en-GB", {
-                      hour: "numeric",
-                      minute: "numeric",
-                      hour12: false,
-                    }).format(Date.parse(events[0]["end"]["dateTime"]))}
-                  </>
-                ) : (
-                  "No upcoming events"
-                )}
-              </h1>
-              <h2 className="progress-title">
-                {!vacant
-                  ? events[1] && events[1].summary
-                  : events[0] && events[0].summary}
-              </h2>
-            </div>
-          </div>
-        </div>
-        <div className="booking-container">
-          <div className="booking-content">
-            <span className="booking-subtitle">Book your slot at </span>
-            <span className="booking-text">{env.TEXT.BOOKING_TEXT}</span>
-          </div>
-        </div>
-      </div>
-      <div className="right-container">
-        <h1 className="right_container-header">Today's Schedule</h1>
-        <div className="schedule-container">
-          {events.length > 0 ? (
-            events.map((e: any, i: number) => {
-              const startDate = new Intl.DateTimeFormat("gb-EN", {
-                hour: "numeric",
-                minute: "numeric",
-                hour12: false,
-              }).format(new Date(Date.parse(e["start"]["dateTime"])));
-              const endDate = new Intl.DateTimeFormat("gb-EN", {
-                hour: "numeric",
-                minute: "numeric",
-                hour12: false,
-              }).format(new Date(Date.parse(e["end"]["dateTime"])));
-
-              return (
-                <div className={`meeting_schedule-container`} key={i}>
-                  <h1>
-                    <span>{startDate}</span>-<span>{endDate}</span>
-                  </h1>
-                  <h3>{e.summary}</h3>
-                </div>
-              );
-            })
-          ) : (
-            <>
-              <h1 className="time-header center ">No upcoming events</h1>
-            </>
-          )}
-          <span className="schedule-subtitle">
-            Available for booking{" "}
-            <span className="schedule-text">{env.TEXT.BOOKING_TEXT}</span>
-          </span>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   ) : (
     <></>
   );
