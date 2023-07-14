@@ -28,7 +28,6 @@ export function useAxios<T>(
         const eventEndTime = events[0].end.dateTime;
         const now = Date.now();
 
-        //check if now is between the start and end time of the event
         if (
           now > Date.parse(eventStartTime) &&
           now < Date.parse(eventEndTime)

@@ -24,8 +24,6 @@ function App() {
     ).toISOString()}`,
   });
 
-  console.log(vacant);
-
   useEffect(() => {
     if (!data || !COLORS) return;
 
@@ -38,9 +36,6 @@ function App() {
   if (data && (!API_KEY || !CID)) {
     return <Error />;
   }
-
-  const upNextIndex = vacant ? 0 : 1;
-
   if (!events) return <></>;
 
   return (
@@ -51,7 +46,11 @@ function App() {
           <h1>{JSON.parse(data.TEXT).MEETING_ROOM_NAME}</h1>
         </div>
         <Progress events={events} vacant={vacant} />
-        <Upcoming events={events} vacant={vacant} upNextIndex={upNextIndex} />
+        <Upcoming
+          events={events}
+          vacant={vacant}
+          upNextIndex={vacant ? 0 : 1}
+        />
         <SlotBooking text={JSON.parse(data.TEXT).BOOKING_TEXT} />
       </div>
       <ScheduleContainer
