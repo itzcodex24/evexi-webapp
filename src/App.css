@@ -413,7 +413,7 @@ table {
 }
 
 .meeting_schedule-active * {
-  color: var(--font-color-secondary);
+  color: var(--font-color-schedule);
   font-weight: bold;
   margin: 0;
 }

@@ -10,8 +10,11 @@ export function useAxios<T>(
   const [vacant, setVacant] = useState<boolean | string>(false);
 
   useEffect(() => {
-    console.log("requesting");
-    request();
+    let interval = setInterval(() => {
+      request();
+    }, 1000 * 30);
+
+    return () => clearInterval(interval);
   }, []);
 
   async function request() {

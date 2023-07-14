@@ -34,8 +34,25 @@ function App() {
   });
 
   if (data && (!API_KEY || !CID)) {
-    return <Error />;
+    return (
+      <Error
+        text={
+          "Please insert both the 'Google Calendar API Key' and 'Google Calendar ID' into the Evexi Admin Dashboard"
+        }
+      />
+    );
   }
+
+  if (_error) {
+    return (
+      <Error
+        text={
+          "Error fetching data from Google Calendar API. Please check config"
+        }
+      />
+    );
+  }
+
   if (!events) return <></>;
 
   return (
