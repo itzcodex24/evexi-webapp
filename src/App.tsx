@@ -11,7 +11,7 @@ import Navbar from "./components/navbar";
 import Progress from "./components/progress";
 
 function App() {
-  const [{ COLORS, ...data }] = initEvexi("Starbucks");
+  const [{ COLORS, ...data }] = initEvexi("Sky");
   const { API_KEY, CID } = JSON.parse(data.API);
 
   const now = new Date(Date.now());

@@ -11,7 +11,7 @@ export default function Upcoming(props: UpcomingProps) {
 
   return (
     <div className="upcoming-container">
-      <div className="upcoming active">
+      <div className="upcoming ">
         <div className="upcoming-content">
           <h4>Up Next</h4>
           <h1 className="progress_time-text" id="upcoming">

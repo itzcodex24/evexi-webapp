@@ -136,7 +136,7 @@ table {
 .container {
   height: 100vh;
   width: 100%;
-  background: var(--primary-color);
+  background: var(--background-main);
   display: flex;
 }
 
@@ -151,14 +151,14 @@ table {
 
 .right-container {
   flex: 1.5;
-  background: var(--background-color);
+  background: var(--schedule-background-color);
   display: flex;
   flex-direction: column;
 }
 
 .right_container-header {
   font-size: 2rem;
-  color: var(--font-color-schedule);
+  color: var(--primary-font-color-schedule);
   text-transform: uppercase;
   margin-top: 4rem;
   font-weight: 900;
@@ -201,17 +201,17 @@ table {
 
 .time-header {
   font-size: 2rem;
+  color: var(--primary-font-color);
 }
 
 .time-header.center {
   text-align: center;
-  color: var(--secondary-color);
   font-weight: bold;
 }
 
 .time-desc {
   font-size: 1rem;
-  color: var(--font-color-muted);
+  color: var(--muted-font-color);
 }
 
 .meeting-container {
@@ -219,7 +219,7 @@ table {
 }
 
 .meeting-container h1 {
-  color: var(--font-color-primary);
+  color: var(--primary-font-color);
   font-weight: 900;
   font-size: 2.8rem;
   text-transform: uppercase;
@@ -232,12 +232,12 @@ table {
 }
 
 .progress-container h4 {
-  color: var(--font-color-muted);
+  color: var(--muted-font-color);
   letter-spacing: 0.1px;
 }
 
 .progress_time-text {
-  color: var(--font-color-secondary);
+  color: var(--primary-font-color);
   font-size: 3.4rem;
   font-weight: 100;
 }
@@ -258,51 +258,49 @@ table {
 
 .upcoming-content {
   padding: 4rem 3rem;
+  color: var(--progress-font-color);
 }
 
 .upcoming {
-  color: var(--font-color-primary);
   width: 95%;
   display: flex;
-  background: var(--secondary-color);
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-}
-
-.upcoming.active {
-  background: var(--font-color-primary);
-  border: 10px solid var(--tertiary-color);
-  color: var(--secondary-color);
+  background: var(--progress-background-color);
+  border: 10px solid var(--primary-font-color-schedule);
+  color: var(--progress-font-color);
   border-radius: 10px;
 }
 
-.upcoming.active .progress_time-text,
-.upcoming.active .progress-title {
-  color: var(--secondary-color);
+.upcoming .progress_time-text,
+.upcoming .progress-title {
+  color: var(--progress-font-color);
 }
 
 .booking-container {
   margin: 0 auto;
-  color: var(--font-color-schedule);
+  color: var();
   width: 95%;
-  border-radius: 200px;
-  border: 2px solid var(--font-color-primary);
-  background: var(--background-color-slot);
+  border-radius: 10px;
+  border: 2px solid var(--booking-font-color);
+  overflow: hidden;
   margin-bottom: 2rem;
 }
 
 .booking-content {
   padding: 0.8rem 1rem;
+  background: var(--booking-background-color);
 }
 
 .booking-text {
   font-weight: 900;
   letter-spacing: 0.1px;
+  color: var(--booking-font-color);
 }
 
 .booking-subtitle {
-  color: var(--font-color-muted);
+  color: var(--booking-muted-font-color);
 }
 
 .schedule-container {
@@ -319,7 +317,7 @@ table {
   width: 80%;
   display: flex;
   justify-content: center;
-  background: var(--background-color-schedule);
+  background: var(--schedule-background-container-color);
   align-items: flex-start;
   flex-direction: column;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
@@ -341,7 +339,7 @@ table {
 .meeting_schedule-container h3 {
   font-size: 1.2rem;
   text-transform: uppercase;
-  color: var(--font-color-muted);
+  color: var(--muted-font-color-schedule);
   font-weight: bold;
 }
 
@@ -365,14 +363,14 @@ table {
 }
 
 .schedule-subtitle {
-  color: var(--font-color-secondary);
+  color: var(--muted-font-color-schedule);
   letter-spacing: 0.4px;
   opacity: 0.8;
   text-align: center;
 }
 
 .schedule-text {
-  color: var(--font-color-secondary);
+  color: var(--primary-font-color-schedule);
 
   letter-spacing: 0.1px;
   text-decoration: none;
