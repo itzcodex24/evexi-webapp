@@ -14,6 +14,8 @@ export function useAxios<T>(
       request();
     }, 1000 * 30);
 
+    request();
+
     return () => clearInterval(interval);
   }, []);
 
@@ -26,22 +28,24 @@ export function useAxios<T>(
         setData(res.data);
 
         let events = res.data.items;
+        if (events.length > 0) {
+          const eventStartTime = events[0].start.dateTime;
+          const eventEndTime = events[0].end.dateTime;
+          const now = Date.now();
 
-        const eventStartTime = events[0].start.dateTime;
-        const eventEndTime = events[0].end.dateTime;
-        const now = Date.now();
-
-        if (
-          now > Date.parse(eventStartTime) &&
-          now < Date.parse(eventEndTime)
-        ) {
-          setVacant(false);
-        } else {
-          console.log("vacant");
-          setVacant(getDateDifference(Date.parse(eventStartTime), now));
+          if (
+            now > Date.parse(eventStartTime) &&
+            now < Date.parse(eventEndTime)
+          ) {
+            setVacant(false);
+          } else {
+            console.log("vacant");
+            setVacant(getDateDifference(Date.parse(eventStartTime), now));
+          }
         }
       })
       .catch((error) => {
+        console.log(error);
         setError(error.message);
       })
       .finally(function () {
