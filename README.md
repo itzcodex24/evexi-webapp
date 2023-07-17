@@ -1,46 +1,41 @@
-# Getting Started with Create React App
+# Evexi Media Player
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Project details
 
-## Available Scripts
+- This project was built for displaying meetings and events pulled from Google Calendar using the Google Calendar API and displaying these for corporate clients
+- It uses the Evexi NPM package and its API to pull environmental variables from the Evexi Admin Portal
 
-In the project directory, you can run:
+## How to initialise
 
-### `npm start`
+1. Sign into the Google Cloud Console [Google Cloud Console](https://console.developers.google.com/)
+2. Get a free API Key at [Google Calendar API](https://console.cloud.google.com/apis/library/calendar-json.googleapis.com)
+3. Clone the repo
+   ```sh
+   git clone https://github.com/itzcodex24/evexi-webapp
+   ```
+4. Install NPM packages
+   ```sh
+   npm install
+   ```
+5. Enter your API and Calendar ID in `src/evexi/init.ts`
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+   ```ts
+     API: JSON.stringify({
+      API_KEY: "YOUR_API_KEY",
+      CID: "YOUR_CALENDAR_ID",
+    }),
+   ```
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+6. Start the project
+   ```sh
+   npm run start
+   ```
 
-### `npm test`
+## Built with
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+- ReactJS
+- Evexi API
 
-### `npm run build`
+## Documentation
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+The Evexi API documentation can be found [here]('https://github.com/Evexi/Evexi')
