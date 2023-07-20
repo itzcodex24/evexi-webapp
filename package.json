@@ -1,6 +1,6 @@
 {
   "name": "evexi-webapp",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "private": true,
   "dependencies": {
     "@fullcalendar/core": "^6.1.8",
@@ -21,9 +21,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "DISABLE_ESLINT_PLUGIN=true react-scripts start",
-    "build": "react-scripts build",
+    "start": "react-scripts start",
+    "build": "BUILD_PATH='./dist' react-scripts build",
     "test": "react-scripts test",
+    "package": "sh package.sh",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
