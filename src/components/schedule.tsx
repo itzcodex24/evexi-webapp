@@ -2,7 +2,7 @@ import { formatTime } from "../helpers/format-time";
 
 type ScheduleContainerProps = {
   vacant: boolean | string;
-  events: any;
+  events: EventAPI;
   text: string;
 };
 
@@ -30,7 +30,7 @@ export default function ScheduleContainer(props: ScheduleContainerProps) {
       <h1 className="right_container-header">Today's Schedule</h1>
       <div className="schedule-container">
         {events.items.length > 0 ? (
-          events.items.map((e: any, i: number) => {
+          events.items.map((e: EventItem, i: number) => {
             const startDate = formatTime(
               new Date(Date.parse(e["start"]["dateTime"]))
             );

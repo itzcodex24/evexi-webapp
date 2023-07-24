@@ -2,7 +2,7 @@ import { formatTime } from "../helpers/format-time";
 
 type ProgressProps = {
   vacant: boolean | string;
-  events: any;
+  events: EventAPI;
 };
 
 export default function Progress(props: ProgressProps) {

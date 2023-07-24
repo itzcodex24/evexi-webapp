@@ -1,6 +1,6 @@
 import { formatTime } from "../helpers/format-time";
 
-export default function Navbar({ logo }: any) {
+export default function Navbar({ logo }: { logo: string }) {
   return (
     <div className="navbar-container">
       <div className="navbar">

@@ -2,7 +2,7 @@ import { formatTime } from "../helpers/format-time";
 
 type UpcomingProps = {
   upNextIndex: number;
-  events: any;
+  events: EventAPI;
   vacant: boolean | string;
 };
 

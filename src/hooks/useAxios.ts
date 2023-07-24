@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 import { getDateDifference } from "../helpers/getDateDifference";
 export function useAxios<T>(
-  config: AxiosRequestConfig<any>
+  config: AxiosRequestConfig
 ): [boolean, T | undefined, string, boolean | string] {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<T>();

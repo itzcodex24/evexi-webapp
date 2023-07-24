@@ -17,7 +17,7 @@ function App() {
   const now = new Date(Date.now());
   const tomorrow = now.getTime() + 60 * 60 * 24 * 1000;
 
-  const [loading, events, _error, vacant] = useAxios<any>({
+  const [loading, events, _error, vacant] = useAxios<EventAPI>({
     method: "GET",
     url: `https://www.googleapis.com/calendar/v3/calendars/${CID}/events?key=${API_KEY}&orderBy=startTime&singleEvents=true&maxResults=5&timeMin=${now.toISOString()}&timeMax=${new Date(
       tomorrow

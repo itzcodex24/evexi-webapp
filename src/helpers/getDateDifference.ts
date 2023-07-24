@@ -1,4 +1,4 @@
-export function getDateDifference(date1: any, date2: any) {
+export function getDateDifference(date1: number, date2: number) {
   const diffInMilli = Math.abs(date2 - date1);
   const minutes = Math.floor(diffInMilli / (1000 * 60));
   const hours = Math.floor(minutes / 60);
