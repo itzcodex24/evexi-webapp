@@ -1,7 +1,6 @@
 import { useEffect } from "react";
 import "./App.css";
 import "./fonts/montserrat/Montserrat-Bold.ttf";
-import { initEvexi } from "./evexi/init";
 import { useAxios } from "./hooks/useAxios";
 import Error from "./components/error";
 import Upcoming from "./components/upcoming";
@@ -10,9 +9,11 @@ import ScheduleContainer from "./components/schedule";
 import Navbar from "./components/navbar";
 import Progress from "./components/progress";
 
-function App() {
-  const [{ COLORS, ...data }] = initEvexi("Sky");
-  const { API_KEY, CID } = JSON.parse(data.API);
+function App({ config }: { config: any }) {
+  const { COLORS, ...data } = config;
+
+  const API_KEY = data.API_KEY;
+  const CID = data.CID;
 
   const now = new Date(Date.now());
   const tomorrow = now.getTime() + 60 * 60 * 24 * 1000;
