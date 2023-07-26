@@ -182,7 +182,7 @@ table {
 }
 
 .image-container img {
-  aspect-ratio: 1/1;
+  aspect-ratio: auto;
   width: 100%;
 }
 
