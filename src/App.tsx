@@ -10,7 +10,6 @@ import Progress from "./components/progress";
 
 function App({ config }: { config: any }) {
   const { API_KEY, CID, LOGO, TEXT, error } = config;
-  console.log(LOGO);
 
   const now = new Date(Date.now());
   const tomorrow = now.getTime() + 60 * 60 * 24 * 1000;
@@ -36,7 +35,7 @@ function App({ config }: { config: any }) {
     );
   }
 
-  if (!events) return <></>;
+  if (!events) return <div className="loading">Loading...</div>;
 
   return (
     <div className="container">
