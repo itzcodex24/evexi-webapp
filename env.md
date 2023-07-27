@@ -6,35 +6,19 @@ These can be changed in `src/evexi/init.ts`
 
 - TO NOTE: Default to colors is #000000
 
-| Property                            | Type   | Example                                      |
-| ----------------------------------- | ------ | -------------------------------------------- |
-| API_KEY                             | string | AIzaSyCQJFRc4rQiz8lzhjrKg1lTKZb113           |
-| CID                                 | string | john.smith@yahoo.com                         |
-| BOOKING_TEXT                        | string | samsung.meeting.com                          |
-| MEETING_ROOM_NAME                   | string | Room 1                                       |
-| SCHEDULE_BACKGROUND_COLOR           | string | linear-gradient(to bottom, darkblue,#091351) |
-| PRIMARY_FONT_COLOR_SCHEDULE         | string | white                                        |
-| SECONDARY_FONT_COLOR_SCHEDULE       | string | black                                        |
-| SCHEDULE_BACKGROUND_CONTAINER_COLOR | string | white                                        |
-| MUTED_FONT_COLOR_SCHEDULE           | string | gray                                         |
-| BACKGROUND_MAIN                     | string | white                                        |
-| PRIMARY_FONT_COLOR                  | string | gray                                         |
-| SECONDARY_FONT_COLOR                | string | orange                                       |
-| MUTED_FONT_COLOR                    | string | gray                                         |
-| PROGRESS_BACKGROUND_COLOR           | string | black                                        |
-| PROGRESS_FONT_COLOR                 | string | black                                        |
-| BOOKING_FONT_COLOR                  | string | white                                        |
-| BOOKING_MUTED_FONT_COLOR            | string | gray                                         |
-| BOOKING_BACKGROUND_COLOR            | string | blue                                         |
-| LOGO                                | string | data:image/png;base64...                     |
+| Key     | Value                                                                                                                                                                                                                                                                                                                                                                                                                  |
+| ------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| API_KEY | api_key                                                                                                                                                                                                                                                                                                                                                                                                                |
+| CID     | google_calendar_id                                                                                                                                                                                                                                                                                                                                                                                                     |
+| TEXT    | "{BOOKING_TEXT: "", MEETING_ROOM_NAME: ""}"                                                                                                                                                                                                                                                                                                                                                                            |
+| COLORS  | "{SCHEDULE_BACKGROUND_COLOR: "", PRIMARY_FONT_COLOR_SCHEDULE: "", SECONDARY_FONT_COLOR_SCHEDULE: "", SCHEDULE_BACKGROUND_CONTAINER_COLOR: "", MUTED_FONT_COLOR_SCHEDULE: "", BACKGROUND_MAIN: "", PRIMARY_FONT_COLOR: "", SECONDARY_FONT_COLOR: "", MUTED_FONT_COLOR: "", PROGRESS_BACKGROUND_COLOR: "", PROGRESS_FONT_COLOR: "", BOOKING_FONT_COLOR: "", BOOKING_MUTED_FONT_COLOR: "", BOOKING_BACKGROUND_COLOR: ""}" |
+| LOGO    | logo                                                                                                                                                                                                                                                                                                                                                                                                                   |
 
 See example config below:
 
 ```ts
-    API: JSON.stringify({
-      API_KEY: "AIzaSyCQJFvN3AAYRc4rQiz8lzhjrKg1lTKZbPg",
-      CID: "andrei.cherciu24@gmail.com",
-    }),
+    API_KEY: "AIzaSyCQJFvN3AAYRc4rQiz8lzhjrKg1lTKZbPg",
+    CID: "andrei.cherciu24@gmail.com",
     TEXT: JSON.stringify({
       BOOKING_TEXT: "sky.meeting.com",
       MEETING_ROOM_NAME: "room one",
