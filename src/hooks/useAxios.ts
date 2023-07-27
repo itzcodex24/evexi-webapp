@@ -22,7 +22,7 @@ export function useAxios<T>(
   async function request() {
     setLoading(true);
 
-    axios(config)
+    await axios(config)
       .then((res) => {
         setError("");
         setData(res.data);
@@ -47,10 +47,9 @@ export function useAxios<T>(
       .catch((error) => {
         console.log(error);
         setError(error.message);
-      })
-      .finally(function () {
-        setLoading(false);
       });
+
+    setLoading(false);
   }
 
   return [loading, data, error, vacant];

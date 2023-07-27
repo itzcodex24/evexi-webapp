@@ -11,7 +11,7 @@ const root = ReactDOM.createRoot(
 
 const load = async () => {
   if (!!process.env.REACT_APP_IS_DEV) {
-    initEvexi("Starbucks");
+    initEvexi("Sky");
   }
 
   try {

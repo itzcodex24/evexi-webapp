@@ -184,6 +184,8 @@ table {
 .image-container img {
   aspect-ratio: auto;
   width: 100%;
+  display: flex;
+  align-items: center;
 }
 
 .image-container {
