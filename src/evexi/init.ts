@@ -22,7 +22,7 @@ const configs = {
       PROGRESS_BACKGROUND_COLOR: "white",
       PROGRESS_FONT_COLOR: "black",
       BOOKING_FONT_COLOR: "white",
-      BOOKING_BACKGROUND_COLOR: "transparent",
+      BOOKING_BACKGROUND_COLOR: "trainspark",
       BOOKING_MUTED_FONT_COLOR: "gray",
     }),
 

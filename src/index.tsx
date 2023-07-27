@@ -21,9 +21,7 @@ const load = async () => {
     const LOGO = await Evexi.env("LOGO");
     const TEXT = await Evexi.env("TEXT");
 
-    let colors = JSON.parse(COLORS ?? "");
-
-    console.log(colors);
+    let colors = JSON.parse(COLORS ?? "{}");
 
     colors &&
       Object.entries(colors).map(([k, v]) => {

@@ -10,6 +10,7 @@ import Progress from "./components/progress";
 
 function App({ config }: { config: any }) {
   const { API_KEY, CID, LOGO, TEXT, error } = config;
+  console.log(LOGO);
 
   const now = new Date(Date.now());
   const tomorrow = now.getTime() + 60 * 60 * 24 * 1000;
@@ -40,9 +41,11 @@ function App({ config }: { config: any }) {
   return (
     <div className="container">
       <div className="left-container">
-        <Navbar logo={LOGO} />
+        <Navbar logo={LOGO ?? ""} />
         <div className="meeting-container">
-          <h1>{JSON.parse(TEXT).MEETING_ROOM_NAME}</h1>
+          <h1>
+            {JSON.parse(TEXT ?? "{}").MEETING_ROOM_NAME ?? "MEETING_ROOM_NAME"}
+          </h1>
         </div>
         <Progress events={events} vacant={vacant} />
         <Upcoming
@@ -50,10 +53,12 @@ function App({ config }: { config: any }) {
           vacant={vacant}
           upNextIndex={vacant ? 0 : 1}
         />
-        <SlotBooking text={JSON.parse(TEXT).BOOKING_TEXT} />
+        <SlotBooking
+          text={JSON.parse(TEXT ?? "{}").BOOKING_TEXT ?? "BOOKING_TEXT"}
+        />
       </div>
       <ScheduleContainer
-        text={JSON.parse(TEXT).BOOKING_TEXT}
+        text={JSON.parse(TEXT ?? "{}").BOOKING_TEXT ?? "BOOKING_TEXT"}
         events={events}
         vacant={vacant}
       />
