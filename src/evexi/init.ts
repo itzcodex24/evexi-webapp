@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 
 const configs = {
   Starbucks: {
-    API_KEY: "AIzaSyCQJFvN3AAYRc4rQiz8lzhjrKg1lTKZbPg",
+    // API_KEY: "AIzaSyCQJFvN3AAYRc4rQiz8lzhjrKg1lTKZbPg",
     CID: "andrei.cherciu24@gmail.com",
     TEXT: JSON.stringify({
       BOOKING_TEXT: "starbucks.meeting.com",

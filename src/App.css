@@ -245,9 +245,9 @@ table {
 }
 
 .progress-title {
-  color: var(--font-color-primary);
+  color: var(--muted-font-color);
   font-weight: 900;
-  font-size: 2rem;
+  font-size: 3rem;
   text-transform: uppercase;
 }
 
@@ -401,7 +401,7 @@ table {
 }
 
 .error-content h1 {
-  color: var(--font-color-error);
+  color: red;
   text-align: center;
   font-size: 3rem;
   font-weight: 900;
@@ -413,7 +413,7 @@ table {
 }
 
 .meeting_schedule-active * {
-  color: var(--font-color-schedule);
+  color: var(--primary-font-color-schedule);
   font-weight: bold;
   margin: 0;
 }

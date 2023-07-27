@@ -21,7 +21,18 @@ const load = async () => {
     const LOGO = await Evexi.env("LOGO");
     const TEXT = await Evexi.env("TEXT");
 
+    let colors = JSON.parse(COLORS ?? "");
+
+    console.log(colors);
+
+    colors &&
+      Object.entries(colors).map(([k, v]) => {
+        const key = `--${k.replace(/_/g, "-").toLowerCase()}`;
+        document.documentElement.style.setProperty(key, v as string);
+      });
+
     return {
+      error: !API_KEY || !calender_id ? "Missing API_KEY or CID" : "",
       COLORS,
       API_KEY,
       CID: calender_id,
@@ -30,13 +41,18 @@ const load = async () => {
     };
   } catch (err) {
     console.log(`Error : ${err}`);
+    throw Error(err as any);
   }
 };
 
-load().then((config) => {
-  root.render(
-    <React.StrictMode>
-      <App config={config} />
-    </React.StrictMode>
-  );
-});
+load()
+  .then((config) => {
+    root.render(
+      <React.StrictMode>
+        <App config={config} />
+      </React.StrictMode>
+    );
+  })
+  .catch((err) => {
+    console.log(err);
+  });

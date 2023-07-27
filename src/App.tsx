@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import "./App.css";
 import "./fonts/montserrat/Montserrat-Bold.ttf";
 import { useAxios } from "./hooks/useAxios";
@@ -10,7 +9,8 @@ import Navbar from "./components/navbar";
 import Progress from "./components/progress";
 
 function App({ config }: { config: any }) {
-  const { COLORS, API_KEY, CID, LOGO, TEXT } = config;
+  const { API_KEY, CID, LOGO, TEXT, error } = config;
+  console.log(`error : ${error}`);
 
   const now = new Date(Date.now());
   const tomorrow = now.getTime() + 60 * 60 * 24 * 1000;
@@ -22,23 +22,8 @@ function App({ config }: { config: any }) {
     ).toISOString()}`,
   });
 
-  useEffect(() => {
-    if (!COLORS) return;
-
-    Object.keys(JSON.parse(COLORS)).map((k) => {
-      const key = `--${k.replace(/_/g, "-").toLowerCase()}`;
-      document.documentElement.style.setProperty(key, JSON.parse(COLORS)[k]);
-    });
-  });
-
-  if (!API_KEY || !CID) {
-    return (
-      <Error
-        text={
-          "Please insert both the 'Google Calendar API Key' and 'Google Calendar ID' into the Evexi Admin Dashboard"
-        }
-      />
-    );
+  if (error) {
+    return <Error text={error} />;
   }
 
   if (_error) {
