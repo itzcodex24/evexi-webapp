@@ -27,8 +27,14 @@
    ```
 
 6. Start the project
+
    ```sh
    npm run start
+   ```
+
+7. Ready to build for media player?
+   ```sh
+   npm run package
    ```
 
 ## Built with
