@@ -22,11 +22,10 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "cross-env REACT_APP_IS_DEV=true npm run app",
+    "start": "npm run app",
     "app": "react-scripts start",
     "build": "BUILD_PATH='./dist' react-scripts build",
-    "package": "cross-env REACT_APP_IS_DEV=false npm run package-app",
-    "package-app": "sh package.sh"
+    "package": "sh package.sh"
   },
   "eslintConfig": {
     "extends": [
