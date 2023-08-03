@@ -10,9 +10,9 @@ const root = ReactDOM.createRoot(
 );
 
 const load = async () => {
-  // if (process.env.NODE_ENV !== "production") {
-  initEvexi("Starbucks");
-  // }
+  if (process.env.NODE_ENV !== "production") {
+    initEvexi("Starbucks");
+  }
 
   try {
     const COLORS = await Evexi.env("COLOURS");
