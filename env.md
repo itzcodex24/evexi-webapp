@@ -17,14 +17,14 @@ These can be changed in `src/evexi/init.ts`
 See example config below:
 
 ```ts
-    API_KEY: "AIzaSyCQJFvN3AAYRc4rQiz8lzhjrKg1lTKZbPg",
+    API_KEY: "AIzaSBSyCQJSTN3AAYRc4rQilzhjrKg1lTKZbPg",
     CID: "andrei.cherciu24@gmail.com",
     TEXT: JSON.stringify({
       BOOKING_TEXT: "sky.meeting.com",
       MEETING_ROOM_NAME: "room one",
     }),
 
-    COLORS: JSON.stringify({
+    COLOURS: JSON.stringify({
       SCHEDULE_BACKGROUND_COLOR: "linear-gradient(to bottom, darkblue,#091351)",
       PRIMARY_FONT_COLOR_SCHEDULE: "white",
       SECONDARY_FONT_COLOR_SCHEDULE: "black",
