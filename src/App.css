@@ -128,7 +128,8 @@ table {
 
 @font-face {
   font-family: "Montserrat";
-  src: local("Montserrat"),
+  src:
+    local("Montserrat"),
     url("./fonts/montserrat/Montserrat-Bold.ttf") format("truetype");
   font-weigth: bold;
 }
@@ -140,7 +141,7 @@ table {
 }
 
 .left-container {
-  background: var(--background-main, red);
+  background: var(--background-main, #243735);
   flex: 4;
   height: 100%;
   display: flex;
@@ -151,14 +152,14 @@ table {
 
 .right-container {
   flex: 1.5;
-  background: var(--schedule-background-color, red);
+  background: var(--schedule-background-color, white);
   display: flex;
   flex-direction: column;
 }
 
 .right_container-header {
   font-size: 2rem;
-  color: var(--primary-font-color-schedule, red);
+  color: var(--primary-font-color-schedule, #2e6a4e);
   text-transform: uppercase;
   margin-top: 4rem;
   font-weight: 900;
@@ -194,7 +195,7 @@ table {
 }
 
 .time-container {
-  color: var(--font-color-primary, red);
+  color: var(--primary-font-color, white);
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -203,7 +204,7 @@ table {
 
 .time-header {
   font-size: 2rem;
-  color: var(--primary-font-color, red);
+  color: var(--primary-font-color, white);
 }
 
 .time-header.center {
@@ -213,7 +214,7 @@ table {
 
 .time-desc {
   font-size: 1rem;
-  color: var(--muted-font-color, red);
+  color: var(--muted-font-color, #a0a0a0);
 }
 
 .meeting-container {
@@ -221,7 +222,7 @@ table {
 }
 
 .meeting-container h1 {
-  color: var(--primary-font-color, red);
+  color: var(--primary-font-color, white);
   font-weight: 900;
   font-size: 2.8rem;
   text-transform: uppercase;
@@ -234,18 +235,18 @@ table {
 }
 
 .progress-container h4 {
-  color: var(--muted-font-color, red);
+  color: var(--muted-font-color, #a0a0a0);
   letter-spacing: 0.1px;
 }
 
 .progress_time-text {
-  color: var(--primary-font-color, red);
+  color: var(--primary-font-color, white);
   font-size: 3.4rem;
   font-weight: 100;
 }
 
 .progress-title {
-  color: var(--muted-font-color, red);
+  color: var(--muted-font-color, #a0a0a0);
   font-weight: 900;
   font-size: 3rem;
   text-transform: uppercase;
@@ -260,7 +261,7 @@ table {
 
 .upcoming-content {
   padding: 4rem 3rem;
-  color: var(--progress-font-color, red);
+  color: var(--progress-font-color, black);
 }
 
 .upcoming {
@@ -269,39 +270,39 @@ table {
   flex-direction: column;
   justify-content: center;
   align-items: flex-start;
-  background: var(--progress-background-color, red);
-  border: 10px solid var(--primary-font-color-schedule, red);
-  color: var(--progress-font-color, red);
+  background: var(--progress-background-color, white);
+  border: 10px solid var(--primary-font-color-schedule, #2e6a4e);
+  color: var(--progress-font-color, white);
   border-radius: 10px;
 }
 
 .upcoming .progress_time-text,
 .upcoming .progress-title {
-  color: var(--progress-font-color, red);
+  color: var(--progress-font-color, white);
 }
 
 .booking-container {
   margin: 0 auto;
   width: 95%;
   border-radius: 10px;
-  border: 2px solid var(--booking-font-color, red);
+  border: 2px solid var(--booking-font-color, white);
   overflow: hidden;
   margin-bottom: 2rem;
 }
 
 .booking-content {
   padding: 0.8rem 1rem;
-  background: var(--booking-background-color, red);
+  background: var(--booking-background-color, transparent);
 }
 
 .booking-text {
   font-weight: 900;
   letter-spacing: 0.1px;
-  color: var(--booking-font-color, red);
+  color: var(--booking-font-color, white);
 }
 
 .booking-subtitle {
-  color: var(--booking-muted-font-color, red);
+  color: var(--booking-muted-font-color, gray);
 }
 
 .schedule-container {
@@ -318,7 +319,7 @@ table {
   width: 80%;
   display: flex;
   justify-content: center;
-  background: var(--schedule-background-container-color, red);
+  background: var(--schedule-background-container-color, white);
   align-items: flex-start;
   flex-direction: column;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
@@ -328,8 +329,8 @@ table {
 }
 
 .meeting_schedule-container.active {
-  background: var(--secondary-color, red);
-  color: var(--font-color-primary, red);
+  background: var(--secondary-font-color, white);
+  color: var(--primary-font-color, white);
 }
 
 .meeting_schedule-container h1 {
@@ -340,38 +341,28 @@ table {
 .meeting_schedule-container h3 {
   font-size: 1.2rem;
   text-transform: uppercase;
-  color: var(--muted-font-color-schedule, red);
+  color: var(--muted-font-color-schedule, gray);
   font-weight: bold;
-}
-
-.meeting_schedule-container.gradient {
-  background-image: linear-gradient(
-    to right,
-    var(--tertiary-color, red) 1%,
-    var(--secondary-color, red)
-  );
-
-  border: 2px solid var(--font-color-primary, red);
 }
 
 .meeting_schedule-container.gradient h1,
 .meeting_schedule-container.gradient h3 {
-  color: var(--font-color-primary, red);
+  color: var(--primary-font-color, white);
 }
 
 .meeting_schedule-container.active h3 {
-  color: var(--font-color-primary, red);
+  color: var(--primary-font-color, white);
 }
 
 .schedule-subtitle {
-  color: var(--muted-font-color-schedule, red);
+  color: var(--muted-font-color-schedule, gray);
   letter-spacing: 0.4px;
   opacity: 0.8;
   text-align: center;
 }
 
 .schedule-text {
-  color: var(--primary-font-color-schedule, red);
+  color: var(--primary-font-color-schedule, #2e6a4e);
 
   letter-spacing: 0.1px;
   text-decoration: none;
@@ -412,7 +403,7 @@ table {
 }
 
 .meeting_schedule-active * {
-  color: var(--primary-font-color-schedule, red);
+  color: var(--primary-font-color-schedule, #2e6a4e);
   font-weight: bold;
   margin: 0;
 }

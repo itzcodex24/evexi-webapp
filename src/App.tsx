@@ -17,7 +17,7 @@ function App({ config }: { config: any }) {
   const [loading, events, _error, vacant] = useAxios<EventAPI>({
     method: "GET",
     url: `https://www.googleapis.com/calendar/v3/calendars/${CID}/events?key=${API_KEY}&orderBy=startTime&singleEvents=true&maxResults=5&timeMin=${now.toISOString()}&timeMax=${new Date(
-      tomorrow
+      tomorrow,
     ).toISOString()}`,
   });
 
@@ -40,7 +40,7 @@ function App({ config }: { config: any }) {
   return (
     <div className="container">
       <div className="left-container">
-        <Navbar logo={LOGO ?? ""} />
+        <Navbar logo={LOGO ?? null} />
         <div className="meeting-container">
           <h1>
             {JSON.parse(TEXT ?? "{}").MEETING_ROOM_NAME ?? "MEETING_ROOM_NAME"}

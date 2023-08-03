@@ -6,16 +6,16 @@ import { Evexi } from "evexi";
 import { initEvexi } from "./evexi/init";
 
 const root = ReactDOM.createRoot(
-  document.getElementById("root") as HTMLElement
+  document.getElementById("root") as HTMLElement,
 );
 
 const load = async () => {
-  if (process.env.NODE_ENV !== "production") {
-    initEvexi("Starbucks");
-  }
+  // if (process.env.NODE_ENV !== "production") {
+  initEvexi("Starbucks");
+  // }
 
   try {
-    const COLORS = await Evexi.env("COLORS");
+    const COLORS = await Evexi.env("COLOURS");
     const API_KEY = await Evexi.env("API_KEY");
     const calender_id = await Evexi.env("CID");
     const LOGO = await Evexi.env("LOGO");
@@ -48,7 +48,7 @@ load()
     root.render(
       <React.StrictMode>
         <App config={config} />
-      </React.StrictMode>
+      </React.StrictMode>,
     );
   })
   .catch((err) => {

@@ -8,7 +8,7 @@ const configs = {
       BOOKING_TEXT: "starbucks.meeting.com",
       MEETING_ROOM_NAME: "room one",
     }),
-    COLORS: JSON.stringify({
+    COLOURS: JSON.stringify({
       SCHEDULE_BACKGROUND_COLOR: "white",
       PRIMARY_FONT_COLOR_SCHEDULE: "#2e6a4e",
       SECONDARY_FONT_COLOR_SCHEDULE: "black",
@@ -35,7 +35,7 @@ const configs = {
       MEETING_ROOM_NAME: "room one",
     }),
 
-    COLORS: JSON.stringify({
+    COLOURS: JSON.stringify({
       SCHEDULE_BACKGROUND_COLOR: "linear-gradient(to bottom, darkblue,#091351)",
       PRIMARY_FONT_COLOR_SCHEDULE: "white",
       SECONDARY_FONT_COLOR_SCHEDULE: "black",
