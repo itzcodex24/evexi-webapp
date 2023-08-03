@@ -17,8 +17,8 @@ These can be changed in `src/evexi/init.ts`
 See example config below:
 
 ```ts
-    API_KEY: "AIzaSBSyCQJSTN3AAYRc4rQilzhjrKg1lTKZbPg",
-    CID: "andrei.cherciu24@gmail.com",
+    API_KEY: "HsdAWdasAWgASdasdwDDsad",
+    CID: "john.smith@gmail.com",
     TEXT: JSON.stringify({
       BOOKING_TEXT: "sky.meeting.com",
       MEETING_ROOM_NAME: "room one",
