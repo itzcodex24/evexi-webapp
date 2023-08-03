@@ -278,7 +278,7 @@ table {
 
 .upcoming .progress_time-text,
 .upcoming .progress-title {
-  color: var(--progress-font-color, white);
+  color: var(--progress-font-color, black);
 }
 
 .booking-container {
