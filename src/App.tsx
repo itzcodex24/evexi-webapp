@@ -35,7 +35,7 @@ function App({ config }: { config: any }) {
     );
   }
 
-  if (!events) return <div className="loading">Loading...</div>;
+  if (loading || !events) return <div className="loading">Loading...</div>;
 
   return (
     <div className="container">
