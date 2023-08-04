@@ -2,8 +2,8 @@ import { EvexiMock, Evexi } from "evexi";
 
 const configs = {
   Starbucks: {
-    API_KEY: "HsdAWdasAWgASdasdwDDsad",
-    CID: "john.smith@gmail.com",
+    API_KEY: "AIzaSyCQJFvN3AAYRc4rQiz8lzhjrKg1lTKZbPg",
+    CID: "andrei.cherciu24@gmail.com",
     TEXT: JSON.stringify({
       BOOKING_TEXT: "starbucks.meeting.com",
       MEETING_ROOM_NAME: "room one",
