@@ -264,6 +264,10 @@ table {
   color: var(--progress-font-color, black);
 }
 
+.upcoming-content h4 {
+  font-size: 1rem;
+}
+
 .upcoming {
   width: 95%;
   display: flex;
