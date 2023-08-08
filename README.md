@@ -37,6 +37,20 @@
    npm run package
    ```
 
+## Want to add multiple calendars?
+
+- Under `Other Calendars` on the left, click the `+` icon.
+- Select the `Create new calendar` option.
+- Enter the calendar `name` and `description`.
+- Click on `Create Calendar`.
+- Wait until the calendar has been created, and exit out of settings.
+
+- On the main page, under `My calendars` on the left, hover over the new calendar created and select the `⋮` icon.
+- Click on `Settings and Sharing`.
+- Under the `Access permissions for events` header, tick the `Make available to public` checkbox.
+- Scroll down until you see your new Calendar ID.
+- Update your config with the new calendar ID.
+
 ## Built with
 
 - ReactJS
