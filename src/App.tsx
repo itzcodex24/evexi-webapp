@@ -11,14 +11,12 @@ import Progress from "./components/progress";
 function App({ config }: { config: any }) {
   const { API_KEY, CID, LOGO, TEXT, error } = config;
 
-  const now = new Date(Date.now());
-  const tomorrow = now.getTime() + 60 * 60 * 24 * 1000;
+  const startOfToday = new Date(new Date().setHours(0, 0, 0)).toISOString();
+  const endOfToday = new Date(new Date().setHours(23, 59, 59)).toISOString();
 
   const [loading, events, _error, vacant] = useAxios<EventAPI>({
     method: "GET",
-    url: `https://www.googleapis.com/calendar/v3/calendars/${CID}/events?key=${API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${now.toISOString()}&timeMax=${new Date(
-      tomorrow,
-    ).toISOString()}`,
+    url: `https://www.googleapis.com/calendar/v3/calendars/${CID}/events?key=${API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${startOfToday}&timeMax=${endOfToday}`,
   });
 
   if (error) {
@@ -37,6 +35,15 @@ function App({ config }: { config: any }) {
 
   if (loading || !events) return <div className="loading">Loading...</div>;
 
+  const filteredEvents = events.items.filter((e: EventItem) => {
+    const endOfEvent = Date.parse(e.end.dateTime);
+    const now = Date.now();
+
+    if (endOfEvent >= now) {
+      return e;
+    }
+  });
+
   return (
     <div className="container">
       <div className="left-container">
@@ -46,12 +53,8 @@ function App({ config }: { config: any }) {
             {JSON.parse(TEXT ?? "{}").MEETING_ROOM_NAME ?? "MEETING_ROOM_NAME"}
           </h1>
         </div>
-        <Progress events={events} vacant={vacant} />
-        <Upcoming
-          events={events}
-          vacant={vacant}
-          upNextIndex={vacant ? 0 : 1}
-        />
+        <Progress events={filteredEvents} />
+        <Upcoming events={filteredEvents} />
         <SlotBooking
           text={JSON.parse(TEXT ?? "{}").BOOKING_TEXT ?? "BOOKING_TEXT"}
         />
