@@ -2,12 +2,12 @@ import axios, { AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 import { getDateDifference } from "../helpers/getDateDifference";
 export function useAxios<T>(
-  config: AxiosRequestConfig
-): [boolean, T | undefined, string, boolean | string] {
+  config: AxiosRequestConfig,
+): [boolean, T | undefined, string, string] {
   const [loading, setLoading] = useState(true);
   const [data, setData] = useState<T>();
   const [error, setError] = useState("");
-  const [vacant, setVacant] = useState<boolean | string>(false);
+  const [vacant, setVacant] = useState<string>("");
 
   useEffect(() => {
     let interval = setInterval(() => {
@@ -19,12 +19,13 @@ export function useAxios<T>(
     return () => clearInterval(interval);
   }, []);
 
-  async function request() {
+  function request() {
     setLoading(true);
 
-    await axios(config)
+    axios(config)
       .then((res) => {
         setError("");
+
         setData(res.data);
 
         let events = res.data.items;
@@ -37,11 +38,13 @@ export function useAxios<T>(
             now > Date.parse(eventStartTime) &&
             now < Date.parse(eventEndTime)
           ) {
-            setVacant(false);
+            setVacant("MIP");
           } else {
             console.log("vacant");
             setVacant(getDateDifference(Date.parse(eventStartTime), now));
           }
+        } else {
+          setVacant("No upcoming events");
         }
       })
       .catch((error) => {
