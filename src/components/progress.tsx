@@ -25,15 +25,15 @@ export default function Progress(props: ProgressProps) {
               <h1 className="progress_time-text">
                 {events.items[0] &&
                   formatTime(
-                    new Date(Date.parse(events.items[0]["start"]["dateTime"]))
+                    new Date(Date.parse(events.items[0]["start"]["dateTime"])),
                   )}
                 -{" "}
                 {formatTime(
-                  new Date(Date.parse(events.items[0]["end"]["dateTime"]))
+                  new Date(Date.parse(events.items[0]["end"]["dateTime"])),
                 )}
               </h1>
 
-              <h2 className="progress-title">
+              <h2 className="progress-title clamp-1">
                 {events.items[0] && events.items[0].summary}
               </h2>
             </>
