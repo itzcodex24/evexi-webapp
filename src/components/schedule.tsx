@@ -50,12 +50,29 @@ export default function ScheduleContainer(props: ScheduleContainerProps) {
                     </div>
                   )}
                 </div>
+                {filteredEvents.length === 1 ? (
+                  <span className="schedule-subtitle">
+                    Available for booking{" "}
+                    <span className="schedule-text">{text}</span>
+                  </span>
+                ) : !filteredEvents[i + 1] ? (
+                  <span className="schedule-subtitle">
+                    Available for booking{" "}
+                    <span className="schedule-text">{text}</span>
+                  </span>
+                ) : filteredEvents[i].end.dateTime !==
+                  filteredEvents[i + 1].start.dateTime ? (
+                  <span className="schedule-subtitle">
+                    Available for booking{" "}
+                    <span className="schedule-text">{text}</span>
+                  </span>
+                ) : null}
               </>
             );
           })
         ) : (
           <>
-            <h1 className="time-header center ">No upcoming events</h1>
+            <h1 className="time-header center">No upcoming events</h1>
           </>
         )}
       </div>
