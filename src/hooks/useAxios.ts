@@ -1,4 +1,4 @@
-import axios, { AxiosRequestConfig } from "axios";
+import axios, { AxiosError, AxiosRequestConfig } from "axios";
 import { useEffect, useState } from "react";
 import { getDateDifference } from "../helpers/getDateDifference";
 export function useAxios<T>(
@@ -12,7 +12,7 @@ export function useAxios<T>(
   useEffect(() => {
     let interval = setInterval(() => {
       request();
-    }, 1000 * 30);
+    }, 1000 * 60);
 
     request();
 
@@ -47,9 +47,14 @@ export function useAxios<T>(
           setVacant("No upcoming events");
         }
       })
-      .catch((error) => {
+      .catch((error: AxiosError) => {
         console.log(error);
-        setError(error.message);
+        // handle 403 or 429 errors
+        if (error.status === 403 || error.status === 429) {
+          setError("Too many requests. Please try again later.");
+        } else {
+          setError(error.message);
+        }
       });
 
     setLoading(false);
