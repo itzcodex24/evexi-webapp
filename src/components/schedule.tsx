@@ -42,7 +42,7 @@ export default function ScheduleContainer(props: ScheduleContainerProps) {
                     <span>{startDate}</span>-<span>{endDate}</span>
                   </h1>
 
-                  <h3 className="clamp-1">{e.summary}</h3>
+                  <h3 className="clamp-1">{e.summary ?? "Untitled Event"}</h3>
                   {!vacant && i === 0 && (
                     <div className="meeting_schedule-active">
                       <div className="active-button">・</div>
