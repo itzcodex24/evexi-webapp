@@ -152,7 +152,7 @@ table {
 
 .right-container {
   flex: 1.5;
-  background: var(--schedule-background-color, white);
+  background: var(--schedule-background-color, #fff);
   display: flex;
   flex-direction: column;
 }
@@ -161,9 +161,8 @@ table {
   font-size: 2rem;
   color: var(--primary-font-color-schedule, #2e6a4e);
   text-transform: uppercase;
-  margin-top: 4rem;
   font-weight: 900;
-  margin-bottom: 6rem;
+  margin: 1.5rem 0;
   text-align: center;
 }
 
@@ -316,7 +315,9 @@ table {
   justify-content: flex-start;
   align-items: center;
   flex-direction: column;
-  gap: 2rem;
+  gap: 1.2rem;
+  overflow-y: scroll;
+  margin: 2rem 0;
 }
 
 .meeting_schedule-container {
@@ -326,10 +327,10 @@ table {
   background: var(--schedule-background-container-color, white);
   align-items: flex-start;
   flex-direction: column;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
   padding: 1rem;
   gap: 0.5rem;
   border-radius: 5px;
+  box-shadow: 0 0 10px black;
 }
 
 .meeting_schedule-container.active {
@@ -438,4 +439,8 @@ table {
   display: -webkit-box;
   -webkit-box-orient: vertical;
   -webkit-line-clamp: 1;
+}
+
+::-webkit-scrollbar {
+  width: 0rem;
 }
