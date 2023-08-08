@@ -1,6 +1,4 @@
-import { useMemo } from "react";
 import { formatTime } from "../helpers/format-time";
-import { getOverlap } from "../helpers/getOverlap";
 
 type ScheduleContainerProps = {
   vacant: boolean | string;
@@ -11,22 +9,20 @@ type ScheduleContainerProps = {
 export default function ScheduleContainer(props: ScheduleContainerProps) {
   const { events, vacant, text } = props;
 
-  let filteredEvents = useMemo(() => {
-    return events.items.filter((e: EventItem) => {
-      const endOfToday = new Date().setHours(23, 59, 59);
-      const startOfToday = new Date().setHours(0, 0, 0);
-      const eventStart = Date.parse(e.start.dateTime);
+  let filteredEvents = events.items.filter((e: EventItem) => {
+    const endOfToday = new Date().setHours(23, 59, 59);
+    const startOfToday = new Date().setHours(0, 0, 0);
+    const eventStart = Date.parse(e.start.dateTime);
 
-      if (endOfToday >= eventStart && startOfToday <= eventStart) {
-        return e;
-      }
-    });
-  }, [events]);
+    if (endOfToday >= eventStart && startOfToday <= eventStart) {
+      return e;
+    }
+  });
 
   return (
     <div className="right-container">
-      <h1 className="right_container-header">Today's Schedule</h1>
       <div className="schedule-container">
+        <h1 className="right_container-header">Today's Schedule</h1>
         {filteredEvents.length > 0 ? (
           filteredEvents.map((e: EventItem, i: number) => {
             const startDate = formatTime(
