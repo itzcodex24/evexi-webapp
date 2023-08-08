@@ -1,4 +1,5 @@
 export function getDateDifference(date1: number, date2: number) {
+  if (!date1 || !date2) return "No upcoming events";
   const diffInMilli = Math.abs(date2 - date1);
   const minutes = Math.floor(diffInMilli / (1000 * 60));
   const hours = Math.floor(minutes / 60);
