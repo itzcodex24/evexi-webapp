@@ -1,3 +1,8 @@
+## [v0.1.6]
+
+- Updated API to fetch all of the events registered for today.
+- Reworked `Upcoming` and `Progress` components to work with this new data.
+
 ## [v0.1.5]
 
 - Updated documentation to help user setup extra calendars and configure them correctly with their respective calendar ID
