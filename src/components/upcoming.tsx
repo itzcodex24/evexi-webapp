@@ -37,8 +37,10 @@ export default function Upcoming(props: UpcomingProps) {
           {events.items[upNextIndex] && (
             <h2 className="progress-title">
               {!vacant
-                ? events.items[1] && events.items[1].summary
-                : events.items[0] && events.items[0].summary}
+                ? (events.items[1] && events.items[1].summary) ??
+                  "Untitled Event"
+                : (events.items[0] && events.items[0].summary) ??
+                  "Untitled Event"}
             </h2>
           )}
         </div>
