@@ -1,47 +1,50 @@
-import { useMemo } from "react";
 import { formatTime } from "../helpers/format-time";
+import { isBetweenTimes } from "../helpers/isBetweenTimes";
 
-type UpcomingProps = {
-  upNextIndex: number;
-  events: EventAPI;
-  vacant: boolean | string;
-};
+export default function Upcoming({ events }: { events: EventItem[] }) {
+  let index: number;
 
-export default function Upcoming(props: UpcomingProps) {
-  const { upNextIndex, events, vacant } = props;
+  if (events.length === 0) {
+    index = 0;
+  } else {
+    if (
+      isBetweenTimes(
+        Date.parse(events[0].start.dateTime),
+        Date.now(),
+        Date.parse(events[0].end.dateTime),
+      )
+    ) {
+      index = 1;
+    } else {
+      index = 0;
+    }
+  }
 
   return (
     <div className="upcoming-container">
       <div className="upcoming ">
         <div className="upcoming-content">
-          <h4>Up Next</h4>
-          <h1 className="progress_time-text" id="upcoming">
-            {events.items[upNextIndex] &&
-            new Date().setHours(23, 59, 59) >=
-              Date.parse(events.items[upNextIndex].start.dateTime) &&
-            new Date().setHours(0, 0, 0) <=
-              Date.parse(events.items[upNextIndex].start.dateTime) ? (
+          {events.length > 0 ? (
+            events[index] ? (
               <>
-                {formatTime(
-                  Date.parse(events.items[upNextIndex]["start"]["dateTime"]),
-                )}{" "}
-                -{" "}
-                {formatTime(
-                  Date.parse(events.items[upNextIndex]["end"]["dateTime"]),
-                )}
+                <h1>Up next</h1>
+                <h1 className="progress_time-text" id="progress">
+                  {formatTime(Date.parse(events[index]["start"]["dateTime"]))}-{" "}
+                  {formatTime(Date.parse(events[index]["end"]["dateTime"]))}
+                </h1>
+                <h2 className="progress-title">
+                  {events[index]["summary"] ?? "Untitled Event"}
+                </h2>
               </>
             ) : (
-              "No upcoming events"
-            )}
-          </h1>
-          {events.items[upNextIndex] && (
-            <h2 className="progress-title">
-              {!vacant
-                ? (events.items[1] && events.items[1].summary) ??
-                  "Untitled Event"
-                : (events.items[0] && events.items[0].summary) ??
-                  "Untitled Event"}
-            </h2>
+              <h1 className="progress_time-text" id="progress">
+                No upcoming events
+              </h1>
+            )
+          ) : (
+            <h1 className="progress_time-text" id="progress">
+              No upcoming events
+            </h1>
           )}
         </div>
       </div>
