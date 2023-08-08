@@ -3,6 +3,7 @@ declare interface EventAPI {
 }
 
 declare interface EventItem {
+  created: string;
   start: {
     dateTime: string;
   };
