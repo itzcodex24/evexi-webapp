@@ -1,3 +1,10 @@
+## v[0.1.7]
+
+- Started handling 403 and 429 errors for rate limitations.
+- Increased interval time for fetching data from 30 to 60 seconds.
+- Improved styling on the right container with the sche display.
+-
+
 ## [v0.1.6]
 
 - Updated API to fetch all of the events registered for today.
