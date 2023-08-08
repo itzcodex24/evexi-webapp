@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { formatTime } from "../helpers/format-time";
 
 type ScheduleContainerProps = {
@@ -25,17 +26,29 @@ export default function ScheduleContainer(props: ScheduleContainerProps) {
     }
   }
 
+  let filteredEvents = useMemo(() => {
+    return events.items.filter((e: EventItem) => {
+      const endOfToday = new Date().setHours(23, 59, 59);
+      const startOfToday = new Date().setHours(0, 0, 0);
+      const eventStart = Date.parse(e.start.dateTime);
+
+      if (endOfToday >= eventStart && startOfToday <= eventStart) {
+        return e;
+      }
+    });
+  }, [events]);
+
   return (
     <div className="right-container">
       <h1 className="right_container-header">Today's Schedule</h1>
       <div className="schedule-container">
-        {events.items.length > 0 ? (
-          events.items.map((e: EventItem, i: number) => {
+        {filteredEvents.length > 0 ? (
+          filteredEvents.map((e: EventItem, i: number) => {
             const startDate = formatTime(
-              new Date(Date.parse(e["start"]["dateTime"]))
+              new Date(Date.parse(e["start"]["dateTime"])),
             );
             const endDate = formatTime(
-              new Date(Date.parse(e["end"]["dateTime"]))
+              new Date(Date.parse(e["end"]["dateTime"])),
             );
             return (
               <div className={`meeting_schedule-container`} key={i}>

@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import { formatTime } from "../helpers/format-time";
 
 type UpcomingProps = {
@@ -15,25 +16,31 @@ export default function Upcoming(props: UpcomingProps) {
         <div className="upcoming-content">
           <h4>Up Next</h4>
           <h1 className="progress_time-text" id="upcoming">
-            {events.items[upNextIndex] ? (
+            {events.items[upNextIndex] &&
+            new Date().setHours(23, 59, 59) >=
+              Date.parse(events.items[upNextIndex].start.dateTime) &&
+            new Date().setHours(0, 0, 0) <=
+              Date.parse(events.items[upNextIndex].start.dateTime) ? (
               <>
                 {formatTime(
-                  Date.parse(events.items[upNextIndex]["start"]["dateTime"])
+                  Date.parse(events.items[upNextIndex]["start"]["dateTime"]),
                 )}{" "}
                 -{" "}
                 {formatTime(
-                  Date.parse(events.items[upNextIndex]["end"]["dateTime"])
+                  Date.parse(events.items[upNextIndex]["end"]["dateTime"]),
                 )}
               </>
             ) : (
               "No upcoming events"
             )}
           </h1>
-          <h2 className="progress-title">
-            {!vacant
-              ? events.items[1] && events.items[1].summary
-              : events.items[0] && events.items[0].summary}
-          </h2>
+          {events.items[upNextIndex] && (
+            <h2 className="progress-title">
+              {!vacant
+                ? events.items[1] && events.items[1].summary
+                : events.items[0] && events.items[0].summary}
+            </h2>
+          )}
         </div>
       </div>
     </div>
