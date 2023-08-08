@@ -16,7 +16,7 @@ function App({ config }: { config: any }) {
 
   const [loading, events, _error, vacant] = useAxios<EventAPI>({
     method: "GET",
-    url: `https://www.googleapis.com/calendar/v3/calendars/${CID}/events?key=${API_KEY}&orderBy=startTime&singleEvents=true&maxResults=5&timeMin=${now.toISOString()}&timeMax=${new Date(
+    url: `https://www.googleapis.com/calendar/v3/calendars/${CID}/events?key=${API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${now.toISOString()}&timeMax=${new Date(
       tomorrow,
     ).toISOString()}`,
   });
