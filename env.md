@@ -38,7 +38,7 @@ See example config below:
       PROGRESS_FONT_COLOR: "black",
       BOOKING_FONT_COLOR: "white",
       BOOKING_MUTED_FONT_COLOR: "gray",
-      BOOKING_BACKGROUND_COLOR: "#0000aa",
+      BOOKING_BACKGROUND_COLOR: "#0000aa"
     }),
     LOGO: "data:image/png;base64..."
 ```
