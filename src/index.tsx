@@ -17,23 +17,37 @@ const load = async () => {
   try {
     const COLORS = await Evexi.env("COLOURS");
     const API_KEY = await Evexi.env("API_KEY");
-    const calender_id = await Evexi.env("CID");
+    const CID = await Evexi.env("CID");
     const LOGO = await Evexi.env("LOGO");
     const TEXT = await Evexi.env("TEXT");
+    let error: string | undefined = undefined;
 
-    let colors = JSON.parse(COLORS ?? "{}");
+    try {
+      JSON.parse(TEXT ?? "");
+    } catch (err) {
+      err = "Text configuration error";
+    }
 
-    colors &&
+    try {
+      const colors = JSON.parse(COLORS as string);
       Object.entries(colors).map(([k, v]) => {
         const key = `--${k.replace(/_/g, "-").toLowerCase()}`;
         document.documentElement.style.setProperty(key, v as string);
       });
+    } catch (err) {
+      console.log(err);
+      error = "Invalid COLOURS ";
+    }
+
+    if (!API_KEY || !CID) {
+      error = "Missing API_KEY or CID";
+    }
 
     return {
-      error: !API_KEY || !calender_id ? "Missing API_KEY or CID" : "",
+      error: error,
       COLORS,
       API_KEY,
-      CID: calender_id,
+      CID,
       LOGO,
       TEXT,
     };
