@@ -1,4 +1,9 @@
-## v[0.1.7]
+## [v0.1.8]
+
+- Added verification for the `COLOURS` and `TEXT`env variables to ensure the config is initialised corrently, and warning the user if not
+- Updated documentation for the env variables
+
+## [v0.1.7]
 
 - Started handling 403 and 429 errors for rate limitations.
 - Increased interval time for fetching data from 30 to 60 seconds.
