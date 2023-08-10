@@ -1,6 +1,7 @@
 ## [v0.1.10]
 
 - Added auto scroll on the schedule container in case there are multiple events and these are overflowing
+- Resolved bug where COLOURS or TEXT not provided would display an error
 
 ## [v0.1.9]
 
