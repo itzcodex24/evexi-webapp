@@ -1,3 +1,12 @@
+## [v0.1.10]
+
+- Added auto scroll on the schedule container in case there are multiple events and these are overflowing
+
+## [v0.1.9]
+
+- Updated text across app per QA request.
+- Resolved filtered events bug, where events set at 12:00AM were not being rendered.
+
 ## [v0.1.8]
 
 - Added verification for the `COLOURS` and `TEXT`env variables to ensure the config is initialised corrently, and warning the user if not
