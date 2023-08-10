@@ -40,15 +40,13 @@ export function useAxios<T>(
           ) {
             setVacant("MIP");
           } else {
-            console.log("vacant");
             setVacant(getDateDifference(Date.parse(eventStartTime), now));
           }
         } else {
-          setVacant("No upcoming events");
+          setVacant("No upcoming meetings");
         }
       })
       .catch((error: AxiosError) => {
-        console.log(error);
         // handle 403 or 429 errors
         if (error.status === 403 || error.status === 429) {
           setError("Too many requests. Please try again later.");

@@ -25,7 +25,7 @@ const load = async () => {
     try {
       JSON.parse(TEXT ?? "");
     } catch (err) {
-      err = "Text configuration error";
+      error = "Invalid values set for TEXT variable";
     }
 
     try {
@@ -35,8 +35,7 @@ const load = async () => {
         document.documentElement.style.setProperty(key, v as string);
       });
     } catch (err) {
-      console.log(err);
-      error = "Invalid COLOURS ";
+      error = "Invalid values set for COLOURS variable";
     }
 
     if (!API_KEY || !CID) {
@@ -52,7 +51,6 @@ const load = async () => {
       TEXT,
     };
   } catch (err) {
-    console.log(`Error : ${err}`);
     throw Error(err as any);
   }
 };
@@ -65,6 +63,4 @@ load()
       </React.StrictMode>,
     );
   })
-  .catch((err) => {
-    console.log(err);
-  });
+  .catch((err) => {});
