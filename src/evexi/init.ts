@@ -4,10 +4,10 @@ const configs = {
   Starbucks: {
     API_KEY: "AIzaSyCQJFvN3AAYRc4rQiz8lzhjrKg1lTKZbPg",
     CID: "andrei.cherciu24@gmail.com",
-    TEXT: `{
-      "BOOKING_TEXT": "starbucks.meeting.com",
-      "MEETING_ROOM_NAME": "room one"
-    }`,
+    // TEXT: `{
+    //   "BOOKING_TEXT": "starbucks.meeting.com",
+    //   "MEETING_ROOM_NAME": "room one"
+    // }`,
     COLOURS: JSON.stringify({
       SCHEDULE_BACKGROUND_COLOR: "white",
       PRIMARY_FONT_COLOR_SCHEDULE: "#2e6a4e",

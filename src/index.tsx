@@ -23,13 +23,13 @@ const load = async () => {
     let error: string | undefined = undefined;
 
     try {
-      JSON.parse(TEXT ?? "");
+      JSON.parse(TEXT ?? "{}");
     } catch (err) {
       error = "Invalid values set for TEXT variable";
     }
 
     try {
-      const colors = JSON.parse(COLORS as string);
+      const colors = JSON.parse(COLORS ?? "{}");
       Object.entries(colors).map(([k, v]) => {
         const key = `--${k.replace(/_/g, "-").toLowerCase()}`;
         document.documentElement.style.setProperty(key, v as string);
