@@ -38,12 +38,12 @@ export default function Upcoming({ events }: { events: EventItem[] }) {
               </>
             ) : (
               <h1 className="progress_time-text" id="progress">
-                No upcoming events
+                No upcoming meetings
               </h1>
             )
           ) : (
             <h1 className="progress_time-text" id="progress">
-              No upcoming events
+              No upcoming meetings
             </h1>
           )}
         </div>

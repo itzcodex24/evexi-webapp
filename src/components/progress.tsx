@@ -37,7 +37,7 @@ export default function Progress({ events }: { events: EventItem[] }) {
           </>
         )
       ) : (
-        <h4 className="progress_time-text">No upcoming meetings!</h4>
+        <h4 className="progress_time-text">No current meeting!</h4>
       )}
     </div>
   );
