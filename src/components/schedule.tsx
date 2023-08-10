@@ -1,30 +1,63 @@
+import { useEffect, useState } from "react";
 import { formatTime } from "../helpers/format-time";
+import { isBetweenTimes } from "../helpers/isBetweenTimes";
 
 type ScheduleContainerProps = {
   vacant: boolean | string;
-  events: EventAPI;
+  events: EventItem[];
   text: string;
 };
 
 export default function ScheduleContainer(props: ScheduleContainerProps) {
-  const { events, vacant, text } = props;
+  const { events, text } = props;
+  const [activeEvent, setActiveEvent] = useState<EventItem | null>(null);
 
-  let filteredEvents = events.items.filter((e: EventItem) => {
-    const endOfToday = new Date().setHours(23, 59, 59);
-    const startOfToday = new Date().setHours(0, 0, 0);
-    const eventStart = Date.parse(e.start.dateTime);
+  useEffect(() => {
+    for (let i = 0; i < events.length; i++) {
+      const oneHourAgo = new Date().setHours(new Date().getHours() - 1);
+      const eventStart = Date.parse(events[i].start.dateTime);
 
-    if (endOfToday >= eventStart && startOfToday <= eventStart) {
-      return e;
+      if (eventStart >= oneHourAgo) {
+        setActiveEvent(events[i]);
+        break;
+      } else {
+        setActiveEvent(null);
+      }
     }
-  });
+  }, []);
+
+  useEffect(() => {
+    if (activeEvent) {
+      const activeMeeting = document.getElementById(
+        `meeting-id-${events.indexOf(activeEvent)}`,
+      );
+
+      if (activeMeeting) {
+        activeMeeting.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "center",
+        });
+      }
+    } else {
+      const activeMeeting = document.getElementById(`meeting-id-0`);
+
+      if (activeMeeting) {
+        activeMeeting.scrollIntoView({
+          behavior: "smooth",
+          block: "center",
+          inline: "center",
+        });
+      }
+    }
+  }, [activeEvent]);
 
   return (
     <div className="right-container">
       <div className="schedule-container">
         <h1 className="right_container-header">Today's Schedule</h1>
-        {filteredEvents.length > 0 ? (
-          filteredEvents.map((e: EventItem, i: number) => {
+        {events.length > 0 ? (
+          events.map((e: EventItem, i: number) => {
             const startDate = formatTime(
               new Date(Date.parse(e["start"]["dateTime"])),
             );
@@ -33,31 +66,38 @@ export default function ScheduleContainer(props: ScheduleContainerProps) {
             );
             return (
               <>
-                <div className={`meeting_schedule-container`} key={i}>
+                <div
+                  className={`meeting_schedule-container`}
+                  key={i}
+                  id={`meeting-id-${i}`}
+                >
                   <h1>
                     <span>{startDate}</span>-<span>{endDate}</span>
                   </h1>
 
                   <h3 className="clamp-1">{e.summary ?? "Untitled Event"}</h3>
-                  {!vacant && i === 0 && (
+                  {isBetweenTimes(
+                    Date.parse(e.start.dateTime),
+                    Date.now(),
+                    Date.parse(e.end.dateTime),
+                  ) && (
                     <div className="meeting_schedule-active">
                       <div className="active-button">・</div>
                       <h4>NOW</h4>
                     </div>
                   )}
                 </div>
-                {filteredEvents.length === 1 ? (
+                {events.length === 1 ? (
                   <span className="schedule-subtitle">
                     Available for booking{" "}
                     <span className="schedule-text">{text}</span>
                   </span>
-                ) : !filteredEvents[i + 1] ? (
+                ) : !events[i + 1] ? (
                   <span className="schedule-subtitle">
                     Available for booking{" "}
                     <span className="schedule-text">{text}</span>
                   </span>
-                ) : filteredEvents[i].end.dateTime !==
-                  filteredEvents[i + 1].start.dateTime ? (
+                ) : events[i].end.dateTime !== events[i + 1].start.dateTime ? (
                   <span className="schedule-subtitle">
                     Available for booking{" "}
                     <span className="schedule-text">{text}</span>
@@ -68,7 +108,7 @@ export default function ScheduleContainer(props: ScheduleContainerProps) {
           })
         ) : (
           <>
-            <h1 className="time-header center">No upcoming events</h1>
+            <h1 className="time-header center">No upcoming meetings</h1>
           </>
         )}
       </div>
