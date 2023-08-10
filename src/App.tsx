@@ -8,7 +8,7 @@ import ScheduleContainer from "./components/schedule";
 import Navbar from "./components/navbar";
 import Progress from "./components/progress";
 
-function App({ config }: { config: any }) {
+function App({ config }: any) {
   const { API_KEY, CID, LOGO, TEXT, error } = config;
 
   const startOfToday = new Date(new Date().setHours(0, 0, 0)).toISOString();
@@ -34,6 +34,16 @@ function App({ config }: { config: any }) {
   }
 
   if (loading || !events) return <div className="loading">Loading...</div>;
+
+  let scheduledEvents = events.items.filter((e: EventItem) => {
+    const endOfToday = new Date().setHours(23, 59, 59);
+    const startOfToday = new Date().setHours(0, 0, 0) - 1000;
+    const eventStart = Date.parse(e.start.dateTime);
+
+    if (endOfToday >= eventStart && startOfToday <= eventStart) {
+      return e;
+    }
+  });
 
   const filteredEvents = events.items.filter((e: EventItem) => {
     const endOfEvent = Date.parse(e.end.dateTime);
@@ -61,7 +71,7 @@ function App({ config }: { config: any }) {
       </div>
       <ScheduleContainer
         text={JSON.parse(TEXT ?? "{}").BOOKING_TEXT ?? "BOOKING_TEXT"}
-        events={events}
+        events={scheduledEvents}
         vacant={vacant}
       />
     </div>
