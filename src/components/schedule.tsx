@@ -97,7 +97,8 @@ export default function ScheduleContainer(props: ScheduleContainerProps) {
                     Available for booking{" "}
                     <span className="schedule-text">{text}</span>
                   </span>
-                ) : events[i].end.dateTime !== events[i + 1].start.dateTime ? (
+                ) : events[i].end.dateTime !== events[i + 1].start.dateTime &&
+                  events[i].start.dateTime !== events[i + 1].start.dateTime ? (
                   <span className="schedule-subtitle">
                     Available for booking{" "}
                     <span className="schedule-text">{text}</span>

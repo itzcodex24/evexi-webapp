@@ -32,7 +32,7 @@ export default function Upcoming({ events }: { events: EventItem[] }) {
                   {formatTime(Date.parse(events[index]["start"]["dateTime"]))}-{" "}
                   {formatTime(Date.parse(events[index]["end"]["dateTime"]))}
                 </h1>
-                <h2 className="progress-title">
+                <h2 className="progress-title clamp-1">
                   {events[index]["summary"] ?? "Untitled Event"}
                 </h2>
               </>

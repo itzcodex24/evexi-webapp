@@ -1,3 +1,9 @@
+## [v0.1.11]
+
+- Resolves UI bugs with font sizes.
+- Resolved transparency bugs with default colours.
+- Resolved text overflowing issue on the up next container
+
 ## [v0.1.10]
 
 - Added auto scroll on the schedule container in case there are multiple events and these are overflowing
