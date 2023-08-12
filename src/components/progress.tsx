@@ -12,7 +12,7 @@ export default function Progress({ events }: { events: EventItem[] }) {
           Date.parse(events[0].end.dateTime),
         ) ? (
           <>
-            <h4>Meeting in progress</h4>
+            <h4 className="meeting-status">Meeting in progress</h4>
             <h1 className="progress_time-text">
               {events[0] &&
                 formatTime(
@@ -37,7 +37,7 @@ export default function Progress({ events }: { events: EventItem[] }) {
           </>
         )
       ) : (
-        <h4 className="progress_time-text">No current meeting!</h4>
+        <h4 className="progress_time-text">No current meeting</h4>
       )}
     </div>
   );
