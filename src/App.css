@@ -203,7 +203,12 @@ table {
 
 .time-header {
   font-size: 2rem;
-  color: var(--primary-font-color, white);
+  color: var(--primary-font-color, #2e6a4e);
+}
+
+.time-header-schedule {
+  color: var(--primary-font-color-schedule, #2e6a4e);
+  font-size: 1.4rem;
 }
 
 .time-header.center {

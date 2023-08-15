@@ -109,7 +109,9 @@ export default function ScheduleContainer(props: ScheduleContainerProps) {
           })
         ) : (
           <>
-            <h1 className="time-header center">No upcoming meetings</h1>
+            <h1 className="time-header-schedule center">
+              No upcoming meetings
+            </h1>
           </>
         )}
       </div>
