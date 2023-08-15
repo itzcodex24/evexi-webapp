@@ -1,24 +1,42 @@
 import { formatTime } from "../helpers/format-time";
 import { isBetweenTimes } from "../helpers/isBetweenTimes";
 
-export default function Upcoming({ events }: { events: EventItem[] }) {
-  let index: number;
-
-  if (events.length === 0) {
-    index = 0;
-  } else {
-    if (
-      isBetweenTimes(
-        Date.parse(events[0].start.dateTime),
-        Date.now(),
-        Date.parse(events[0].end.dateTime),
-      )
-    ) {
-      index = 1;
-    } else {
-      index = 0;
+const GetUpNextIndex = (events: EventItem[]) => {
+  if (events.length > 0) {
+    for (let i = 0; i < events.length; i++) {
+      if (events[i + 1]) {
+        if (events[i].end.dateTime !== events[i + 1].end.dateTime) {
+          if (
+            !isBetweenTimes(
+              Date.parse(events[i].start.dateTime),
+              Date.now(),
+              Date.parse(events[i].end.dateTime),
+            )
+          ) {
+            return i;
+          } else {
+            return i + 1;
+          }
+        }
+      } else {
+        if (
+          !isBetweenTimes(
+            Date.parse(events[i].start.dateTime),
+            Date.now(),
+            Date.parse(events[i].end.dateTime),
+          )
+        ) {
+          return i;
+        } else {
+          return -1;
+        }
+      }
     }
-  }
+  } else return 0;
+};
+export default function Upcoming({ events }: { events: EventItem[] }) {
+  let index = GetUpNextIndex(events);
+  if (!index) index = 0;
 
   return (
     <div className="upcoming-container">
