@@ -1,3 +1,8 @@
+## [v0.0.12]
+
+- Resolved bug with incorrect data showing up in the up next container when meetings were over running.
+- Changed default text color for some text which was showing up as white and thus making it invisible.
+
 ## [v0.1.11]
 
 - Resolves UI bugs with font sizes.
