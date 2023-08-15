@@ -35,34 +35,24 @@ function App({ config }: any) {
 
   if (loading || !events) return <div className="loading">Loading...</div>;
 
-  let scheduledEvents = events.items
-    .filter((e: EventItem) => {
-      const endOfToday = new Date().setHours(23, 59, 59);
-      const startOfToday = new Date().setHours(0, 0, 0) - 1000;
-      const eventStart = Date.parse(e.start.dateTime);
+  let scheduledEvents = events.items.filter((e: EventItem) => {
+    const endOfToday = new Date().setHours(23, 59, 59);
+    const startOfToday = new Date().setHours(0, 0, 0) - 1000;
+    const eventStart = Date.parse(e.start.dateTime);
 
-      if (endOfToday >= eventStart && startOfToday <= eventStart) {
-        return e;
-      }
-    })
-    .sort(
-      (a: EventItem, b: EventItem) =>
-        Date.parse(a.created) - Date.parse(b.created),
-    );
+    if (endOfToday >= eventStart && startOfToday <= eventStart) {
+      return e;
+    }
+  });
 
-  const filteredEvents = events.items
-    .filter((e: EventItem) => {
-      const endOfEvent = Date.parse(e.end.dateTime);
-      const now = Date.now();
+  const filteredEvents = events.items.filter((e: EventItem) => {
+    const endOfEvent = Date.parse(e.end.dateTime);
+    const now = Date.now();
 
-      if (endOfEvent >= now) {
-        return e;
-      }
-    })
-    .sort(
-      (a: EventItem, b: EventItem) =>
-        Date.parse(a.created) - Date.parse(b.created),
-    );
+    if (endOfEvent >= now) {
+      return e;
+    }
+  });
 
   return (
     <div className="container">

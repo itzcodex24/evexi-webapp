@@ -17,6 +17,18 @@ const GetUpNextIndex = (events: EventItem[]) => {
           } else {
             return i + 1;
           }
+        } else {
+          if (
+            !isBetweenTimes(
+              Date.parse(events[i].start.dateTime),
+              Date.now(),
+              Date.parse(events[i].end.dateTime),
+            )
+          ) {
+            return i;
+          } else {
+            return -1;
+          }
         }
       } else {
         if (
@@ -47,8 +59,15 @@ export default function Upcoming({ events }: { events: EventItem[] }) {
               <>
                 <h1>Up next</h1>
                 <h1 className="progress_time-text" id="progress">
-                  {formatTime(Date.parse(events[index]["start"]["dateTime"]))}-{" "}
-                  {formatTime(Date.parse(events[index]["end"]["dateTime"]))}
+                  {formatTime(
+                    Date.parse(events[index]["start"]["dateTime"]),
+                    events[index].start.timeZone,
+                  )}
+                  -{" "}
+                  {formatTime(
+                    Date.parse(events[index]["end"]["dateTime"]),
+                    events[index].end.timeZone,
+                  )}
                 </h1>
                 <h2 className="progress-title clamp-1">
                   {events[index]["summary"] ?? "Untitled Event"}
