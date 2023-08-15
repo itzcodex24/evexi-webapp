@@ -1,4 +1,9 @@
-## [v0.0.12]
+## [v0.1.13]
+
+- Resolves further issues with overlapping events.
+- Improves time formatting for timeZones received from the API
+
+## [v0.1.12]
 
 - Resolved bug with incorrect data showing up in the up next container when meetings were over running.
 - Changed default text color for some text which was showing up as white and thus making it invisible.
