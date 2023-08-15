@@ -1,7 +1,11 @@
-export function formatTime(date: Date | number) {
-  return new Intl.DateTimeFormat("gb-EN", {
+export function formatTime(
+  date: Date | number,
+  timeZone: string | undefined = undefined,
+) {
+  return new Intl.DateTimeFormat(undefined, {
     hour: "numeric",
     minute: "numeric",
     hour12: false,
+    timeZone,
   }).format(date);
 }

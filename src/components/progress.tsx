@@ -17,8 +17,13 @@ export default function Progress({ events }: { events: EventItem[] }) {
               {events[0] &&
                 formatTime(
                   new Date(Date.parse(events[0]["start"]["dateTime"])),
+                  events[0].start.timeZone,
                 )}
-              - {formatTime(new Date(Date.parse(events[0]["end"]["dateTime"])))}
+              -{" "}
+              {formatTime(
+                new Date(Date.parse(events[0]["end"]["dateTime"])),
+                events[0].end.timeZone,
+              )}
             </h1>
 
             <h2 className="progress-title clamp-1">

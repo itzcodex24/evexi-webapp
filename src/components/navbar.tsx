@@ -20,7 +20,7 @@ export default function Navbar({ logo }: { logo: string | null }) {
         <div className="time-container">
           <h1 className="time-header">{formatTime(time)}</h1>
           <span className="time-desc">
-            {new Intl.DateTimeFormat("en-GB", {
+            {new Intl.DateTimeFormat(undefined, {
               dateStyle: "full",
             }).format(new Date(Date.now()))}
           </span>

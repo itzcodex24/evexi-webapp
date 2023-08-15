@@ -60,9 +60,11 @@ export default function ScheduleContainer(props: ScheduleContainerProps) {
           events.map((e: EventItem, i: number) => {
             const startDate = formatTime(
               new Date(Date.parse(e["start"]["dateTime"])),
+              e.start.timeZone,
             );
             const endDate = formatTime(
               new Date(Date.parse(e["end"]["dateTime"])),
+              e.end.timeZone,
             );
             return (
               <>
