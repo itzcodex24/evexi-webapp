@@ -1,3 +1,7 @@
+## [v0.1.14]
+
+- Resolves bugs where events were not sorted based on their creation date.
+
 ## [v0.1.13]
 
 - Resolves further issues with overlapping events.
