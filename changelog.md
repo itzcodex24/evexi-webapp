@@ -1,3 +1,7 @@
+## [v0.1.16]
+
+- Resolved issues with sorting on the schedule container
+
 ## [v0.1.15]
 
 - Resolved mutation issues within the progress component
