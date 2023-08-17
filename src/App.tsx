@@ -45,11 +45,8 @@ function App({ config }: any) {
     }
   });
 
-  const filteredEvents = events.items.filter((e: EventItem) => {
-    const endOfEvent = Date.parse(e.end.dateTime);
-    const now = Date.now();
-
-    if (endOfEvent >= now) {
+  let returnEvents = scheduledEvents.filter((e: EventItem) => {
+    if (Date.parse(e.end.dateTime) >= Date.now()) {
       return e;
     }
   });
@@ -63,8 +60,8 @@ function App({ config }: any) {
             {JSON.parse(TEXT ?? "{}").MEETING_ROOM_NAME ?? "MEETING_ROOM_NAME"}
           </h1>
         </div>
-        <Progress events={filteredEvents} />
-        <Upcoming events={filteredEvents} />
+        <Progress events={returnEvents} />
+        <Upcoming events={returnEvents} />
         <SlotBooking
           text={JSON.parse(TEXT ?? "{}").BOOKING_TEXT ?? "BOOKING_TEXT"}
         />
