@@ -347,6 +347,11 @@ table {
   color: var(--primary-font-color, white);
 }
 
+.meeting_schedule-container.border {
+  box-shadow: 0 0 10px var(--primary-font-color-schedule, #2e6a4e);
+  border: 4px solid var(--primary-font-color-schedule, #2e6a4e);
+}
+
 .meeting_schedule-container h1 {
   font-size: 2rem;
   font-weight: 200;
