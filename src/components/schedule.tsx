@@ -10,6 +10,7 @@ type ScheduleContainerProps = {
 
 export default function ScheduleContainer(props: ScheduleContainerProps) {
   const { events, text } = props;
+  let clonedEvents = [...events];
   const [activeEvent, setActiveEvent] = useState<EventItem | null>(null);
 
   useEffect(() => {
@@ -57,7 +58,7 @@ export default function ScheduleContainer(props: ScheduleContainerProps) {
       <div className="schedule-container">
         <h1 className="right_container-header">Today's Schedule</h1>
         {events.length > 0 ? (
-          events.map((e: EventItem, i: number) => {
+          clonedEvents.map((e: EventItem, i: number) => {
             const startDate = formatTime(
               new Date(Date.parse(e["start"]["dateTime"])),
               e.start.timeZone,
@@ -72,6 +73,17 @@ export default function ScheduleContainer(props: ScheduleContainerProps) {
               Date.now(),
               Date.parse(e.end.dateTime),
             );
+
+            if (
+              events[i + 1] &&
+              events[i].end.dateTime === events[i + 1].end.dateTime &&
+              events[i].start.dateTime === events[i + 1].start.dateTime
+            ) {
+              clonedEvents = clonedEvents.sort((a, b) => {
+                return Date.parse(a.created) - Date.parse(b.created);
+              });
+            }
+
             return (
               <>
                 <div
