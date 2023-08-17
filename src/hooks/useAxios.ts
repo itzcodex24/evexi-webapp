@@ -9,10 +9,12 @@ export function useAxios<T>(
   const [error, setError] = useState("");
   const [vacant, setVacant] = useState<string>("");
 
+  const INTERVAL = 1000 * 10; // 1 minute
+
   useEffect(() => {
     let interval = setInterval(() => {
       request();
-    }, 1000 * 60);
+    }, INTERVAL);
 
     request();
 
