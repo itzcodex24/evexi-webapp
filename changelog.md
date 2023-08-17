@@ -1,3 +1,8 @@
+## [v0.1.15]
+
+- Resolved mutation issues within the progress component
+- Resolved bug from version 0.1.14, where events were placed in the wrong order.
+
 ## [v0.1.14]
 
 - Resolves bugs where events were not sorted based on their creation date.
