@@ -18,14 +18,15 @@ const GetUpNextIndex = (events: EventItem[]) => {
   }
 
   for (let i = 0; i < events.length; i++) {
-    if (events[i].end.dateTime === events[i + 1].end.dateTime) {
-      if (inMeeting(i)) {
-        return events.indexOf(
-          events.filter((e) => e.end.dateTime !== events[i].end.dateTime)[0],
-        );
-      } else {
-        return i;
-      }
+    if (
+      events[i].end.dateTime === events[i + 1].end.dateTime &&
+      events[i].start.dateTime === events[i + 1].start.dateTime
+    ) {
+      if (!inMeeting(i)) return i;
+
+      return events.indexOf(
+        events.filter((e) => e.end.dateTime !== events[i].end.dateTime)[0],
+      );
     } else {
       if (inMeeting(i)) return i + 1;
       return i;
