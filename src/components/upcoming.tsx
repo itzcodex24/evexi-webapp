@@ -2,55 +2,37 @@ import { formatTime } from "../helpers/format-time";
 import { isBetweenTimes } from "../helpers/isBetweenTimes";
 
 const GetUpNextIndex = (events: EventItem[]) => {
-  let sortedEvents =
-    events.length > 0 &&
-    events.sort((a, b) => {
-      return Date.parse(a.created) - Date.parse(b.created);
-    });
-  if (sortedEvents) {
-    for (let i = 0; i < sortedEvents.length; i++) {
-      if (sortedEvents[i + 1]) {
-        if (sortedEvents[i].end.dateTime !== sortedEvents[i + 1].end.dateTime) {
-          if (
-            !isBetweenTimes(
-              Date.parse(sortedEvents[i].start.dateTime),
-              Date.now(),
-              Date.parse(sortedEvents[i].end.dateTime),
-            )
-          ) {
-            return i;
-          } else {
-            return i + 1;
-          }
-        } else {
-          if (
-            !isBetweenTimes(
-              Date.parse(sortedEvents[i].start.dateTime),
-              Date.now(),
-              Date.parse(sortedEvents[i].end.dateTime),
-            )
-          ) {
-            return i;
-          } else {
-            return -1;
-          }
-        }
+  const inMeeting = (i: number) =>
+    isBetweenTimes(
+      Date.parse(events[i].start.dateTime),
+      Date.now(),
+      Date.parse(events[i].end.dateTime),
+    );
+
+  if (events.length === 0) return -1;
+
+  if (events.length === 1) {
+    if (inMeeting(0)) return -1;
+
+    return 0;
+  }
+
+  for (let i = 0; i < events.length; i++) {
+    if (events[i].end.dateTime === events[i + 1].end.dateTime) {
+      if (inMeeting(i)) {
+        return events.indexOf(
+          events.filter((e) => e.end.dateTime !== events[i].end.dateTime)[0],
+        );
       } else {
-        if (
-          !isBetweenTimes(
-            Date.parse(sortedEvents[i].start.dateTime),
-            Date.now(),
-            Date.parse(sortedEvents[i].end.dateTime),
-          )
-        ) {
-          return i;
-        } else {
-          return -1;
-        }
+        return i;
       }
+    } else {
+      if (inMeeting(i)) return i + 1;
+      return i;
     }
-  } else return 0;
+  }
 };
+
 export default function Upcoming({ events }: { events: EventItem[] }) {
   let index = GetUpNextIndex(events);
   if (!index) index = 0;
