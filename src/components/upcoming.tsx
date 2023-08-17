@@ -2,15 +2,20 @@ import { formatTime } from "../helpers/format-time";
 import { isBetweenTimes } from "../helpers/isBetweenTimes";
 
 const GetUpNextIndex = (events: EventItem[]) => {
-  if (events.length > 0) {
-    for (let i = 0; i < events.length; i++) {
-      if (events[i + 1]) {
-        if (events[i].end.dateTime !== events[i + 1].end.dateTime) {
+  let sortedEvents =
+    events.length > 0 &&
+    events.sort((a, b) => {
+      return Date.parse(a.created) - Date.parse(b.created);
+    });
+  if (sortedEvents) {
+    for (let i = 0; i < sortedEvents.length; i++) {
+      if (sortedEvents[i + 1]) {
+        if (sortedEvents[i].end.dateTime !== sortedEvents[i + 1].end.dateTime) {
           if (
             !isBetweenTimes(
-              Date.parse(events[i].start.dateTime),
+              Date.parse(sortedEvents[i].start.dateTime),
               Date.now(),
-              Date.parse(events[i].end.dateTime),
+              Date.parse(sortedEvents[i].end.dateTime),
             )
           ) {
             return i;
@@ -20,9 +25,9 @@ const GetUpNextIndex = (events: EventItem[]) => {
         } else {
           if (
             !isBetweenTimes(
-              Date.parse(events[i].start.dateTime),
+              Date.parse(sortedEvents[i].start.dateTime),
               Date.now(),
-              Date.parse(events[i].end.dateTime),
+              Date.parse(sortedEvents[i].end.dateTime),
             )
           ) {
             return i;
@@ -33,9 +38,9 @@ const GetUpNextIndex = (events: EventItem[]) => {
       } else {
         if (
           !isBetweenTimes(
-            Date.parse(events[i].start.dateTime),
+            Date.parse(sortedEvents[i].start.dateTime),
             Date.now(),
-            Date.parse(events[i].end.dateTime),
+            Date.parse(sortedEvents[i].end.dateTime),
           )
         ) {
           return i;

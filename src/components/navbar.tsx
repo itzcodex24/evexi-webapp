@@ -22,7 +22,7 @@ export default function Navbar({ logo }: { logo: string | null }) {
           <span className="time-desc">
             {new Intl.DateTimeFormat(undefined, {
               dateStyle: "full",
-            }).format(new Date(Date.now()))}
+            }).format(time)}
           </span>
         </div>
       </div>
