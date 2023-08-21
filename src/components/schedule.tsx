@@ -57,32 +57,15 @@ export default function ScheduleContainer(props: ScheduleContainerProps) {
       <div className="schedule-container">
         <h1 className="right_container-header">Today's Schedule</h1>
         {events.length > 0 ? (
-          events.map((_, i: number) => {
-            let ordered = [...events];
-            if (
-              ordered[i + 1] &&
-              ordered[i].end.dateTime === ordered[i + 1].end.dateTime &&
-              ordered[i].start.dateTime === ordered[i + 1].start.dateTime
-            ) {
-              ordered = ordered.sort(
-                (a, b) => Date.parse(a.created) - Date.parse(b.created),
-              );
-            }
+          events.map((e: EventItem, i: number) => {
             const startDate = formatTime(
-              new Date(Date.parse(ordered[i]["start"]["dateTime"])),
-              ordered[i].start.timeZone,
+              new Date(Date.parse(e["start"]["dateTime"])),
+              e.start.timeZone,
             );
             const endDate = formatTime(
-              new Date(Date.parse(ordered[i]["end"]["dateTime"])),
-              ordered[i].end.timeZone,
+              new Date(Date.parse(e["end"]["dateTime"])),
+              e.end.timeZone,
             );
-
-            const takingPlace = isBetweenTimes(
-              Date.parse(ordered[i].start.dateTime),
-              Date.now(),
-              Date.parse(ordered[i].end.dateTime),
-            );
-
             return (
               <>
                 <div
@@ -94,29 +77,30 @@ export default function ScheduleContainer(props: ScheduleContainerProps) {
                     <span>{startDate}</span>-<span>{endDate}</span>
                   </h1>
 
-                  <h3 className="clamp-1">
-                    {ordered[i].summary ?? "Untitled Event"}
-                  </h3>
-                  {takingPlace && (
+                  <h3 className="clamp-1">{e.summary ?? "Untitled Event"}</h3>
+                  {isBetweenTimes(
+                    Date.parse(e.start.dateTime),
+                    Date.now(),
+                    Date.parse(e.end.dateTime),
+                  ) && (
                     <div className="meeting_schedule-active">
                       <div className="active-button">・</div>
                       <h4>NOW</h4>
                     </div>
                   )}
                 </div>
-                {ordered.length === 1 ? (
+                {events.length === 1 ? (
                   <span className="schedule-subtitle">
                     Available for booking{" "}
                     <span className="schedule-text">{text}</span>
                   </span>
-                ) : !ordered[i + 1] ? (
+                ) : !events[i + 1] ? (
                   <span className="schedule-subtitle">
                     Available for booking{" "}
                     <span className="schedule-text">{text}</span>
                   </span>
-                ) : ordered[i].end.dateTime !== ordered[i + 1].start.dateTime &&
-                  ordered[i].start.dateTime !==
-                    ordered[i + 1].start.dateTime ? (
+                ) : events[i].end.dateTime !== events[i + 1].start.dateTime &&
+                  events[i].start.dateTime !== events[i + 1].start.dateTime ? (
                   <span className="schedule-subtitle">
                     Available for booking{" "}
                     <span className="schedule-text">{text}</span>
