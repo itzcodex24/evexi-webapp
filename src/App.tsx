@@ -27,7 +27,7 @@ function App({ config }: any) {
     return (
       <Error
         text={
-          "Error fetching data from Google Calendar API. Please check config"
+          "Error fetching data from Google Calendar API. Please check config."
         }
       />
     );
