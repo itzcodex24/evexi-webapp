@@ -19,7 +19,7 @@ const configs = {
       SECONDARY_FONT_COLOR: "white",
       MUTED_FONT_COLOR: "#a0a0a0",
       PROGRESS_BACKGROUND_COLOR: "white",
-      PROGRESS_FONT_COLOR: "black",
+      PROGRESS_FONT_COLOR: "white",
       BOOKING_FONT_COLOR: "white",
       BOOKING_BACKGROUND_COLOR: "transparent",
       BOOKING_MUTED_FONT_COLOR: "gray",

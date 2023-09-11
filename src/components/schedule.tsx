@@ -66,10 +66,18 @@ export default function ScheduleContainer(props: ScheduleContainerProps) {
               new Date(Date.parse(e["end"]["dateTime"])),
               e.end.timeZone,
             );
+            const isNow = isBetweenTimes(
+              Date.parse(e.start.dateTime),
+              Date.now(),
+              Date.parse(e.end.dateTime),
+            );
+
             return (
               <>
                 <div
-                  className={`meeting_schedule-container`}
+                  className={`meeting_schedule-container ${
+                    isNow ? "active" : ""
+                  }`}
                   key={i}
                   id={`meeting-id-${i}`}
                 >
@@ -78,11 +86,7 @@ export default function ScheduleContainer(props: ScheduleContainerProps) {
                   </h1>
 
                   <h3 className="clamp-1">{e.summary ?? "Untitled Event"}</h3>
-                  {isBetweenTimes(
-                    Date.parse(e.start.dateTime),
-                    Date.now(),
-                    Date.parse(e.end.dateTime),
-                  ) && (
+                  {isNow && (
                     <div className="meeting_schedule-active">
                       <div className="active-button">・</div>
                       <h4>NOW</h4>
