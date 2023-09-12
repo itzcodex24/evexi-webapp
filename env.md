@@ -26,7 +26,7 @@ _These can be changed in `src/evexi/init.ts`_
 
 ```ts
     TEXT: JSON.stringify({
-        BOOKING_TEXT: "book.this.room.com"
+        BOOKING_TEXT: "book.this.room.com",
         MEETING_ROOM_NAME: "Conference Room #1"
     })
 ```
@@ -67,7 +67,7 @@ COLOURS: JSON.stringify({
   PROGRESS_FONT_COLOR: "black",
   BOOKING_FONT_COLOR: "white",
   BOOKING_MUTED_FONT_COLOR: "gray",
-  BOOKING_BACKGROUND_COLOR: "#0000aa",
+  BOOKING_BACKGROUND_COLOR: "#0000aa"
 });
 ```
 
@@ -78,7 +78,7 @@ COLOURS: JSON.stringify({
 ```ts
     GOOGLE_API_KEY: "YOUR_API_KEY",
     GOOGLE_CALENDAR_ID: "YOUR_CALENDAR_ID",
-    OFFICE_API_KEY: "YOUR_API_KEY"
+    OFFICE_API_KEY: "YOUR_API_KEY",
     TEXT: `{
       "BOOKING_TEXT": "starbucks.meeting.com",
       "MEETING_ROOM_NAME": "Conference Room #1"
@@ -97,7 +97,7 @@ COLOURS: JSON.stringify({
       PROGRESS_FONT_COLOR: "white",
       BOOKING_FONT_COLOR: "white",
       BOOKING_BACKGROUND_COLOR: "transparent",
-      BOOKING_MUTED_FONT_COLOR: "gray",
+      BOOKING_MUTED_FONT_COLOR: "gray"
     }),
     LOGO: "data:image/"
 ```
