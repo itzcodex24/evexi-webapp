@@ -7,20 +7,28 @@ import SlotBooking from "./components/slot-booking";
 import ScheduleContainer from "./components/schedule";
 import Navbar from "./components/navbar";
 import Progress from "./components/progress";
+import { Config } from ".";
 
-function App({ config }: any) {
-  const { API_KEY, CID, LOGO, TEXT, error } = config;
+function App({ config }: { config: Config }) {
+  const {
+    GOOGLE_API_KEY,
+    GOOGLE_CALENDAR_ID,
+    OFFICE_API_KEY,
+    LOGO,
+    TEXT,
+    ERROR,
+  } = config;
 
   const startOfToday = new Date(new Date().setHours(0, 0, 0)).toISOString();
   const endOfToday = new Date(new Date().setHours(23, 59, 59)).toISOString();
 
   const [loading, events, _error, vacant] = useAxios<EventAPI>({
     method: "GET",
-    url: `https://www.googleapis.com/calendar/v3/calendars/${CID}/events?key=${API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${startOfToday}&timeMax=${endOfToday}`,
+    url: `https://www.googleapis.com/calendar/v3/calendars/${GOOGLE_CALENDAR_ID}/events?key=${GOOGLE_API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${startOfToday}&timeMax=${endOfToday}`,
   });
 
-  if (error) {
-    return <Error text={error} />;
+  if (ERROR) {
+    return <Error text={ERROR} />;
   }
 
   if (_error) {
