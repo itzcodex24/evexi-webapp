@@ -2,12 +2,13 @@ import { EvexiMock, Evexi } from "evexi";
 
 const configs = {
   Starbucks: {
-    API_KEY: "AIzaSyCQJFvN3AAYRc4rQiz8lzhjrKg1lTKZbPg",
-    CID: "andrei.cherciu24@gmail.com",
-    // TEXT: `{
-    //   "BOOKING_TEXT": "starbucks.meeting.com",
-    //   "MEETING_ROOM_NAME": "room one"
-    // }`,
+    GOOGLE_API_KEY: "AIzaSyBWHQTFRztBRb6n3dJbPFPa13a8sMEwqXw",
+    GOOGLE_CALENDAR_ID: "eveximeetingroom@gmail.com",
+    OFFICE_API_KEY: "ss",
+    TEXT: `{
+      "BOOKING_TEXT": "starbucks.meeting.com",
+      "MEETING_ROOM_NAME": "room one"
+    }`,
     COLOURS: JSON.stringify({
       SCHEDULE_BACKGROUND_COLOR: "white",
       PRIMARY_FONT_COLOR_SCHEDULE: "#2e6a4e",
