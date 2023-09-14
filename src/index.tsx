@@ -57,6 +57,7 @@ const load = async () => {
       ERROR: error,
       GOOGLE_API_KEY,
       GOOGLE_CALENDAR_ID,
+      OFFICE_API_KEY,
       LOGO,
       TEXT,
     } as Config;
