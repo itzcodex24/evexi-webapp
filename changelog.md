@@ -1,3 +1,8 @@
+## [v1.0.2]
+
+- Added ENV variables inside `.env` when in development
+- Getting data back from Office 365 Calendar
+
 ## [v1.0.1]
 
 - Added ENV variables for Office 365 Calendar Support
