@@ -1,5 +1,13 @@
 # ENV documentation
 
+**When accessing the app in dev, you will need to create a `.env` file to load your `GOOGLE_API_KEY`, `GOOGLE_CALENDAR_ID` and `OFFICE_API_KEY`**
+
+| KEY                          | VALUE              |
+| ---------------------------- | ------------------ |
+| REACT_APP_GOOGLE_API_KEY     | GOOGLE API KEY     |
+| REACT_APP_GOOGLE_CALENDAR_ID | GOOGLE CALEDAR ID  |
+| REACT_APP_OFFICE_API_KEY     | OFFICE 365 API KEY |
+
 _These can be changed in `src/evexi/init.ts`_
 
 ## Possible properties.
@@ -25,10 +33,10 @@ _These can be changed in `src/evexi/init.ts`_
 ### Below is a sample config which uses the text properties:
 
 ```ts
-    TEXT: JSON.stringify({
-        BOOKING_TEXT: "book.this.room.com",
-        MEETING_ROOM_NAME: "Conference Room #1"
-    })
+TEXT: JSON.stringify({
+  BOOKING_TEXT: "book.this.room.com",
+  MEETING_ROOM_NAME: "Conference Room #1",
+});
 ```
 
 ## COLOURS
@@ -67,7 +75,7 @@ COLOURS: JSON.stringify({
   PROGRESS_FONT_COLOR: "black",
   BOOKING_FONT_COLOR: "white",
   BOOKING_MUTED_FONT_COLOR: "gray",
-  BOOKING_BACKGROUND_COLOR: "#0000aa"
+  BOOKING_BACKGROUND_COLOR: "#0000aa",
 });
 ```
 
