@@ -1,4 +1,4 @@
-declare interface EventAPI {
+declare interface GoogleAPI {
   items: EventItem[];
 }
 

@@ -20,7 +20,7 @@ export function getGoogleData(
   });
 }
 
-function processGoogleAPIResponse(response: EventAPI): EventItem[] {
+function processGoogleAPIResponse(response: GoogleAPI): EventItem[] {
   const data = response.items.map((item) => {
     return {
       summary: item.summary,
