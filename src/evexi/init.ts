@@ -2,11 +2,9 @@ import { EvexiMock, Evexi } from "evexi";
 
 const configs = {
   Starbucks: {
-    API_KEY: process.env.REACT_APP_GOOGLE_API_KEY ?? "",
-    CID: process.env.REACT_APP_GOOGLE_CALENDAR_ID ?? "",
-    GOOGLE_API_KEY: "API_KEY",
-    GOOGLE_CALENDAR_ID: "eveximeetingroom@gmail.com",
-    OFFICE_API_KEY: "ss",
+    GOOGLE_API_KEY: process.env.REACT_APP_GOOGLE_API_KEY ?? "",
+    GOOGLE_CALENDAR_ID: process.env.REACT_APP_GOOGLE_CALENDAR_ID ?? "",
+    OFFICE_API_KEY: process.env.REACT_APP_OFFICE_API_KEY ?? "",
     // TEXT: `{
     //   "BOOKING_TEXT": "starbucks.meeting.com",
     //   "MEETING_ROOM_NAME": "room one"
