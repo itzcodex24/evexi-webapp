@@ -1,3 +1,12 @@
+## [v1.0.1]
+
+- Added ENV variables for Office 365 Calendar Support
+- Updated ENV [documentation](env.md)
+
+## [v1.0.0]
+
+- Released stable version
+
 ## [v0.1.16]
 
 - Resolved issues with sorting on the schedule container
