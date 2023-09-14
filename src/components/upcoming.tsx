@@ -41,37 +41,35 @@ export default function Upcoming({ events }: { events: EventItem[] }) {
   return (
     <div className="upcoming-container">
       <div className="upcoming ">
-        <div className="upcoming-content">
-          {events.length > 0 ? (
-            events[index] ? (
-              <>
-                <h1>Up next</h1>
-                <h1 className="progress_time-text" id="progress">
-                  {formatTime(
-                    Date.parse(events[index]["start"]["dateTime"]),
-                    events[index].start.timeZone,
-                  )}
-                  -{" "}
-                  {formatTime(
-                    Date.parse(events[index]["end"]["dateTime"]),
-                    events[index].end.timeZone,
-                  )}
-                </h1>
-                <h2 className="progress-title clamp-1">
-                  {events[index]["summary"] ?? "Untitled Event"}
-                </h2>
-              </>
-            ) : (
-              <h1 className="progress_time-text" id="progress">
-                No upcoming meetings
-              </h1>
-            )
+        {events.length > 0 ? (
+          events[index] ? (
+            <>
+              <h3>Up next</h3>
+              <h2 className="progress_time-text" id="progress">
+                {formatTime(
+                  Date.parse(events[index]["start"]["dateTime"]),
+                  events[index].start.timeZone,
+                )}
+                -{" "}
+                {formatTime(
+                  Date.parse(events[index]["end"]["dateTime"]),
+                  events[index].end.timeZone,
+                )}
+              </h2>
+              <h2 className="progress-title clamp-1">
+                {events[index]["summary"] ?? "Untitled Event"}
+              </h2>
+            </>
           ) : (
             <h1 className="progress_time-text" id="progress">
               No upcoming meetings
             </h1>
-          )}
-        </div>
+          )
+        ) : (
+          <h1 className="progress_time-text" id="progress">
+            No upcoming meetings
+          </h1>
+        )}
       </div>
     </div>
   );

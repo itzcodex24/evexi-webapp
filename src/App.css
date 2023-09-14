@@ -233,28 +233,36 @@ table {
 }
 
 .progress-container {
+  width: 100%;
   display: flex;
-  flex-direction: column;
-  padding-left: 2rem;
+  justify-content: center;
+  align-items: center;
 }
 
-.progress-container h4 {
-  color: var(--muted-font-color, #a0a0a0);
-  letter-spacing: 0.1px;
+.progress {
+  width: 85%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  background: var(--progress-background-color, white);
+  border: 10px solid var(--primary-font-color-schedule, #2e6a4e);
+  color: var(--progress-font-color, white);
+  border-radius: 10px;
 }
 
 .meeting-status {
-  font-size: 1.6rem;
+  font-size: 1.4rem;
+  color: var(--secondary-font-color-schedule, #2e6a4e);
 }
 
 .progress_time-text {
-  color: var(--primary-font-color, white);
   font-size: 3.4rem;
   font-weight: 100;
 }
 
 .progress-title {
-  color: var(--muted-font-color, #a0a0a0);
+  color: var(--secondary-font-color-schedule, #a0a0a0);
   font-weight: 900;
   font-size: 3rem;
   text-transform: uppercase;
@@ -267,25 +275,19 @@ table {
   align-items: center;
 }
 
-.upcoming-content {
+.progress {
   padding: 4rem 3rem;
-  color: var(--progress-font-color, black);
-}
-
-.upcoming-content h4 {
-  font-size: 1rem;
+  color: var(--secondary-font-color-schedule, black);
 }
 
 .upcoming {
-  width: 95%;
+  width: 85%;
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  background: var(--progress-background-color, white);
-  border: 10px solid var(--primary-font-color-schedule, #2e6a4e);
-  color: var(--progress-font-color, white);
-  border-radius: 10px;
+}
+
+.upcoming h3 {
+  color: var(--muted-font-color, white);
 }
 
 .upcoming .progress_time-text,
@@ -343,11 +345,6 @@ table {
 }
 
 .meeting_schedule-container.active {
-  background: var(--secondary-font-color, white);
-  color: var(--primary-font-color, white);
-}
-
-.meeting_schedule-container.border {
   box-shadow: 0 0 10px var(--primary-font-color-schedule, #2e6a4e);
   border: 4px solid var(--primary-font-color-schedule, #2e6a4e);
 }
@@ -362,15 +359,6 @@ table {
   text-transform: uppercase;
   color: var(--muted-font-color-schedule, gray);
   font-weight: bold;
-}
-
-.meeting_schedule-container.gradient h1,
-.meeting_schedule-container.gradient h3 {
-  color: var(--primary-font-color, white);
-}
-
-.meeting_schedule-container.active h3 {
-  color: var(--primary-font-color, white);
 }
 
 .schedule-subtitle {
