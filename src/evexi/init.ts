@@ -4,7 +4,7 @@ const configs = {
   Starbucks: {
     GOOGLE_API_KEY: process.env.REACT_APP_GOOGLE_API_KEY ?? "",
     GOOGLE_CALENDAR_ID: process.env.REACT_APP_GOOGLE_CALENDAR_ID ?? "",
-    OFFICE_API_KEY: process.env.REACT_APP_OFFICE_API_KEY ?? "",
+    // OFFICE_API_KEY: process.env.REACT_APP_OFFICE_API_KEY ?? "",
     // TEXT: `{
     //   "BOOKING_TEXT": "starbucks.meeting.com",
     //   "MEETING_ROOM_NAME": "room one"

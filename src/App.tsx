@@ -14,21 +14,9 @@ function App({ config }: { config: Config }) {
 
   const [loading, data, error] = useCalendarData(config);
 
-  console.log(data);
+  if (ERROR) return <Error text={ERROR} />;
 
-  if (ERROR) {
-    return <Error text={ERROR} />;
-  }
-
-  if (error) {
-    return (
-      <Error
-        text={
-          "Error fetching data from Google Calendar API. Please check config."
-        }
-      />
-    );
-  }
+  if (error) return <Error text={error} />;
 
   if (loading || !data) return <div className="loading">Loading...</div>;
 
