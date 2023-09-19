@@ -3,7 +3,6 @@ import { formatTime } from "../helpers/format-time";
 import { isBetweenTimes } from "../helpers/isBetweenTimes";
 
 type ScheduleContainerProps = {
-  vacant: boolean | string;
   events: EventItem[];
   text: string;
 };

@@ -1,6 +1,5 @@
 import "./App.css";
 import "./fonts/montserrat/Montserrat-Bold.ttf";
-import { useAxios } from "./hooks/useAxios";
 import Error from "./components/error";
 import Upcoming from "./components/upcoming";
 import SlotBooking from "./components/slot-booking";
@@ -8,30 +7,20 @@ import ScheduleContainer from "./components/schedule";
 import Navbar from "./components/navbar";
 import Progress from "./components/progress";
 import { Config } from ".";
+import { useCalendarData } from "./hooks/useCalendarData";
 
 function App({ config }: { config: Config }) {
-  const {
-    GOOGLE_API_KEY,
-    GOOGLE_CALENDAR_ID,
-    OFFICE_API_KEY,
-    LOGO,
-    TEXT,
-    ERROR,
-  } = config;
+  const { ERROR, TEXT, LOGO } = config;
 
-  const startOfToday = new Date(new Date().setHours(0, 0, 0)).toISOString();
-  const endOfToday = new Date(new Date().setHours(23, 59, 59)).toISOString();
+  const [loading, data, error] = useCalendarData(config);
 
-  const [loading, events, _error, vacant] = useAxios<EventAPI>({
-    method: "GET",
-    url: `https://www.googleapis.com/calendar/v3/calendars/${GOOGLE_CALENDAR_ID}/events?key=${GOOGLE_API_KEY}&orderBy=startTime&singleEvents=true&timeMin=${startOfToday}&timeMax=${endOfToday}`,
-  });
+  console.log(data);
 
   if (ERROR) {
     return <Error text={ERROR} />;
   }
 
-  if (_error) {
+  if (error) {
     return (
       <Error
         text={
@@ -41,9 +30,9 @@ function App({ config }: { config: Config }) {
     );
   }
 
-  if (loading || !events) return <div className="loading">Loading...</div>;
+  if (loading || !data) return <div className="loading">Loading...</div>;
 
-  let scheduledEvents = events.items.filter((e: EventItem) => {
+  let scheduledEvents = data.filter((e: EventItem) => {
     const endOfToday = new Date().setHours(23, 59, 59);
     const startOfToday = new Date().setHours(0, 0, 0) - 1000;
     const eventStart = Date.parse(e.start.dateTime);
@@ -77,10 +66,11 @@ function App({ config }: { config: Config }) {
       <ScheduleContainer
         text={JSON.parse(TEXT ?? "{}").BOOKING_TEXT ?? "BOOKING_TEXT"}
         events={scheduledEvents}
-        vacant={vacant}
       />
     </div>
   );
+
+  return <>Hello</>;
 }
 
 export default App;
