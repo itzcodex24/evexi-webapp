@@ -12,6 +12,17 @@ export function useCalendarData(
   const [error, setError] = useState<string>("");
 
   useEffect(() => {
+    function request() {
+      setLoading(true);
+      setError("");
+
+      getData(config)
+        .then((res) => {
+          setData(res);
+        })
+        .catch(setError)
+        .finally(() => setLoading(false));
+    }
     let interval = setInterval(() => {
       request();
     }, INTERVAL_TIME);
@@ -21,19 +32,7 @@ export function useCalendarData(
     return () => {
       clearInterval(interval);
     };
-  }, []);
-
-  function request() {
-    setLoading(true);
-    setError("");
-
-    getData(config)
-      .then((res) => {
-        setData(res);
-      })
-      .catch(setError)
-      .finally(() => setLoading(false));
-  }
+  }, [config]);
 
   return [loading, data, error];
 }

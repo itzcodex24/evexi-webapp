@@ -40,25 +40,21 @@ function App({ config }: { config: Config }) {
     <div className="container">
       <div className="left-container">
         <Navbar logo={LOGO ?? null} />
-        <div className="meeting-container">
-          <h1>
-            {JSON.parse(TEXT ?? "{}").MEETING_ROOM_NAME ?? "MEETING_ROOM_NAME"}
-          </h1>
+        <div className="content">
+          <div className="meeting-container">
+            <h1>
+              {JSON.parse(TEXT ?? "{}").MEETING_ROOM_NAME ??
+                "MEETING_ROOM_NAME"}
+            </h1>
+          </div>
+          <Progress events={returnEvents} />
         </div>
-        <Progress events={returnEvents} />
-        <Upcoming events={returnEvents} />
         <SlotBooking
           text={JSON.parse(TEXT ?? "{}").BOOKING_TEXT ?? "BOOKING_TEXT"}
         />
       </div>
-      <ScheduleContainer
-        text={JSON.parse(TEXT ?? "{}").BOOKING_TEXT ?? "BOOKING_TEXT"}
-        events={scheduledEvents}
-      />
     </div>
   );
-
-  return <>Hello</>;
 }
 
 export default App;

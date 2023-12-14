@@ -17,19 +17,7 @@ export default function Progress({
             Date.parse(events[0].end.dateTime),
           ) ? (
             <>
-              <h3 className="meeting-status">Meeting in progress</h3>
-              <h1 className="progress_time-text">
-                {events[0] &&
-                  formatTime(
-                    new Date(Date.parse(events[0]["start"]["dateTime"])),
-                    events[0].start.timeZone,
-                  )}
-                -{" "}
-                {formatTime(
-                  new Date(Date.parse(events[0]["end"]["dateTime"])),
-                  events[0].end.timeZone,
-                )}
-              </h1>
+              <h3 className="meeting-status">Ready for collection</h3>
 
               <h2 className="progress-title clamp-1 ">
                 {events[0].summary ?? "Untitled Event"}
@@ -47,7 +35,7 @@ export default function Progress({
             </>
           )
         ) : (
-          <h4 className="progress_time-text">No current meeting</h4>
+          <h4 className="progress_time-text">No pending orders</h4>
         )}
       </div>
     </div>

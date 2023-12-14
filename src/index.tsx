@@ -40,7 +40,7 @@ const load = async () => {
 
     try {
       const colors = JSON.parse(COLOURS ?? "{}");
-      Object.entries(colors).map(([k, v]) => {
+      Object.entries(colors).forEach(([k, v]) => {
         const key = `--${k.replace(/_/g, "-").toLowerCase()}`;
         document.documentElement.style.setProperty(key, v as string);
       });

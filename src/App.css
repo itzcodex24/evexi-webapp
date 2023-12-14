@@ -150,6 +150,13 @@ table {
   align-items: flex-start;
 }
 
+.content {
+  gap: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .right-container {
   flex: 1.5;
   background: var(--schedule-background-color, #fff);
@@ -228,7 +235,7 @@ table {
 .meeting-container h1 {
   color: var(--primary-font-color, white);
   font-weight: 900;
-  font-size: 2.8rem;
+  font-size: 3.8rem;
   text-transform: uppercase;
 }
 
@@ -244,15 +251,16 @@ table {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  align-items: flex-start;
-  background: var(--progress-background-color, white);
-  border: 10px solid var(--primary-font-color-schedule, #2e6a4e);
+  align-items: center;
+  /* background: var(--progress-background-color, white); */
+  /* border: 10px solid var(--primary-font-color-schedule, #2e6a4e); */
   color: var(--progress-font-color, white);
   border-radius: 10px;
 }
 
 .meeting-status {
-  font-size: 1.4rem;
+  font-size: 2rem;
+  padding-bottom: 1rem;
   color: var(--secondary-font-color-schedule, #2e6a4e);
 }
 
@@ -445,4 +453,25 @@ table {
 
 ::-webkit-scrollbar {
   width: 0rem;
+}
+
+@media only screen and (max-width: 1080px) {
+  .image-container {
+    width: 200px;
+    height: 200px;
+  }
+
+  .time-desc {
+    font-size: 2rem;
+  }
+  .time-header {
+    font-size: 3rem;
+  }
+  .meeting-container {
+    width: 100%;
+    padding: 0;
+  }
+  .meeting-container h1 {
+    text-align: center;
+  }
 }
