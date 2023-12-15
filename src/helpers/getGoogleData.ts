@@ -10,8 +10,8 @@ export function getGoogleData(
     const endOfToday = new Date(new Date().setHours(23, 59, 59)).toISOString();
 
     const url = `https://www.googleapis.com/calendar/v3/calendars/${calendarId}/events?key=${apiKey}&orderBy=startTime&singleEvents=true&timeMin=${startOfToday}&timeMax=${endOfToday}`;
-
     axios
+
       .get(url, {
         method: "GET",
       })

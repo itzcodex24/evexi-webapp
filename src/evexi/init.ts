@@ -6,7 +6,7 @@ const configs = {
     GOOGLE_CALENDAR_ID: process.env.REACT_APP_GOOGLE_CALENDAR_ID ?? "",
     // OFFICE_API_KEY: process.env.REACT_APP_OFFICE_API_KEY ?? "",
     TEXT: `{
-      "MEETING_ROOM_NAME": "Bunsik orders"
+      "MEETING_ROOM_NAME": "Ready for Collection"
     }`,
     COLOURS: JSON.stringify({
       SCHEDULE_BACKGROUND_COLOR: "linear-gradient(to bottom, #0f2d4b,#0f2d4b)",

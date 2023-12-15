@@ -48,10 +48,10 @@ const load = async () => {
       error = "Invalid values set for COLOURS variable";
     }
 
-    if (!GOOGLE_API_KEY && !OFFICE_API_KEY) {
-      error =
-        "Please use at least one valid source for your calendar! Either specify the GOOGLE_API_KEY or OFFICE_API_KEY environment variable.";
-    }
+    // if (!GOOGLE_API_KEY && !OFFICE_API_KEY) {
+    //   error =
+    //     "Please use at least one valid source for your calendar! Either specify the GOOGLE_API_KEY or OFFICE_API_KEY environment variable.";
+    // }
 
     return {
       ERROR: error,

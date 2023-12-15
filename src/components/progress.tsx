@@ -17,7 +17,7 @@ export default function Progress({
             Date.parse(events[0].end.dateTime),
           ) ? (
             <>
-              <h3 className="meeting-status">Ready for collection</h3>
+              <h3 className="meeting-status">Order Number</h3>
 
               <h2 className="progress-title clamp-1 ">
                 {events[0].summary ?? "Untitled Event"}

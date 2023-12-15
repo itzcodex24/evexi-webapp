@@ -3,7 +3,7 @@ import { Config } from "..";
 import { getGoogleData } from "../helpers/getGoogleData";
 import { getOfficeData } from "../helpers/getOfficeData";
 
-const INTERVAL_TIME: number = 1000 * 15;
+const INTERVAL_TIME: number = 1000 * 10;
 export function useCalendarData(
   config: Config,
 ): [boolean, EventItem[], string] {
@@ -20,7 +20,10 @@ export function useCalendarData(
         .then((res) => {
           setData(res);
         })
-        .catch(setError)
+        .catch((e) => {
+          setError(e);
+          console.log(e);
+        })
         .finally(() => setLoading(false));
     }
     let interval = setInterval(() => {
@@ -48,6 +51,7 @@ function getData(config: Config): Promise<EventItem[]> {
         );
       });
     } catch (error) {
+      console.log(error);
       reject(error);
     }
   });
