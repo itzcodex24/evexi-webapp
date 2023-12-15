@@ -1,13 +1,10 @@
 import "./App.css";
 import "./fonts/montserrat/Montserrat-Bold.ttf";
 import Error from "./components/error";
-import Upcoming from "./components/upcoming";
-import SlotBooking from "./components/slot-booking";
-import ScheduleContainer from "./components/schedule";
 import Navbar from "./components/navbar";
 import Progress from "./components/progress";
 import { Config } from ".";
-import { useCalendarData } from "./hooks/useCalendarData";
+import  useCalendarData from "./hooks/useCalendarData";
 
 function App({ config }: { config: Config }) {
   const { ERROR, TEXT, LOGO } = config;
@@ -18,7 +15,7 @@ function App({ config }: { config: Config }) {
 
   if (error) return <Error text={error} />;
 
-  if (loading || !data) return <div className="loading">Loading...</div>;
+  if (loading && !data) return <div className="loading">Loading...</div>;
 
   let scheduledEvents = data.filter((e: EventItem) => {
     const endOfToday = new Date().setHours(23, 59, 59);
@@ -37,6 +34,7 @@ function App({ config }: { config: Config }) {
   });
 
   return (
+    <>
     <div className="container">
       <div className="left-container">
         <Navbar logo={LOGO ?? null} />
@@ -49,11 +47,9 @@ function App({ config }: { config: Config }) {
           </div>
           <Progress events={returnEvents} />
         </div>
-        <SlotBooking
-          text={JSON.parse(TEXT ?? "{}").BOOKING_TEXT ?? "BOOKING_TEXT"}
-        />
       </div>
     </div>
+    </>
   );
 }
 

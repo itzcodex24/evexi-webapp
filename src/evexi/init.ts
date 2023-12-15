@@ -1,12 +1,13 @@
 import { EvexiMock, Evexi } from "evexi";
 
 const configs = {
-  Starbucks: {
+  Bunsik: {
     GOOGLE_API_KEY: process.env.REACT_APP_GOOGLE_API_KEY ?? "",
     GOOGLE_CALENDAR_ID: process.env.REACT_APP_GOOGLE_CALENDAR_ID ?? "",
     // OFFICE_API_KEY: process.env.REACT_APP_OFFICE_API_KEY ?? "",
     TEXT: `{
-      "MEETING_ROOM_NAME": "Ready for Collection"
+      "BOOKING_TEXT": "starbucks.meeting.com",
+      "MEETING_ROOM_NAME": "room one"
     }`,
     COLOURS: JSON.stringify({
       SCHEDULE_BACKGROUND_COLOR: "linear-gradient(to bottom, #0f2d4b,#0f2d4b)",

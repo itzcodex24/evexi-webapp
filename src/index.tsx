@@ -1,5 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
+import Error from "./components/error"
 import "./index.css";
 import App from "./App";
 import { Evexi } from "evexi";
@@ -9,7 +10,6 @@ export interface Config {
   ERROR: string | undefined;
   GOOGLE_API_KEY: string | undefined;
   GOOGLE_CALENDAR_ID: string | undefined;
-  OFFICE_API_KEY: string | undefined;
   LOGO: string | undefined;
   TEXT: string | undefined;
 }
@@ -19,15 +19,12 @@ const root = ReactDOM.createRoot(
 );
 
 const load = async () => {
-  if (process.env.NODE_ENV !== "production") {
-    initEvexi("Starbucks");
-  }
+  if (process.env.NODE_ENV !== "production") initEvexi("Bunsik");
 
   try {
     const COLOURS = await Evexi.env("COLOURS");
     const GOOGLE_API_KEY = await Evexi.env("GOOGLE_API_KEY");
     const GOOGLE_CALENDAR_ID = await Evexi.env("GOOGLE_CALENDAR_ID");
-    const OFFICE_API_KEY = await Evexi.env("OFFICE_API_KEY");
     const LOGO = await Evexi.env("LOGO");
     const TEXT = await Evexi.env("TEXT");
     let error: string | undefined = undefined;
@@ -48,16 +45,10 @@ const load = async () => {
       error = "Invalid values set for COLOURS variable";
     }
 
-    // if (!GOOGLE_API_KEY && !OFFICE_API_KEY) {
-    //   error =
-    //     "Please use at least one valid source for your calendar! Either specify the GOOGLE_API_KEY or OFFICE_API_KEY environment variable.";
-    // }
-
     return {
       ERROR: error,
       GOOGLE_API_KEY,
       GOOGLE_CALENDAR_ID,
-      OFFICE_API_KEY,
       LOGO,
       TEXT,
     } as Config;
@@ -74,4 +65,12 @@ load()
       </React.StrictMode>,
     );
   })
-  .catch((err) => {});
+  .catch(() => {
+    root.render(
+      <React.StrictMode>
+        <Error text="Could not load" />
+      </React.StrictMode>,
+    );
+  });
+
+

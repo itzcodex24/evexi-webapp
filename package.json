@@ -1,12 +1,10 @@
 {
   "name": "evexi-webapp",
-  "version": "1.1.0-alpha.1",
+  "version": "1.1.0-alpha.9",
   "license": "MIT",
   "private": true,
   "homepage": "./",
   "dependencies": {
-    "@fullcalendar/core": "^6.1.8",
-    "@fullcalendar/google-calendar": "^6.1.8",
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
