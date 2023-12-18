@@ -22,15 +22,11 @@ function App({ config }: { config: Config }) {
     const startOfToday = new Date().setHours(0, 0, 0) - 1000;
     const eventStart = Date.parse(e.start.dateTime);
 
-    if (endOfToday >= eventStart && startOfToday <= eventStart) {
-      return e;
-    }
+    return endOfToday >= eventStart && startOfToday <= eventStart
   });
 
   let returnEvents = scheduledEvents.filter((e: EventItem) => {
-    if (Date.parse(e.end.dateTime) >= Date.now()) {
-      return e;
-    }
+    return Date.parse(e.end.dateTime) >= Date.now()
   });
 
   return (

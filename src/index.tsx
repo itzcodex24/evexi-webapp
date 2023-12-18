@@ -72,5 +72,3 @@ load()
       </React.StrictMode>,
     );
   });
-
-

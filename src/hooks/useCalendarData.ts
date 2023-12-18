@@ -16,7 +16,7 @@ const useCalendarData = (config: Config): [boolean, EventItem[], string] => {
     request();
 
     return () => clearInterval(interval);
-  }, []);
+  });
 
   function request() {
     setLoading(true);
